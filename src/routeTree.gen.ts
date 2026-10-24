@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteRouteImport } from './routes/auth/route'
 import { Route as CssStylingRouteImport } from './routes/css-styling'
 import { Route as DeferredDataRouteImport } from './routes/deferred-data'
 import { Route as DeferredHydrationRouteImport } from './routes/deferred-hydration'
@@ -38,6 +39,8 @@ import { Route as StreamingRouteImport } from './routes/streaming'
 import { Route as TanstackQueryRouteImport } from './routes/tanstack-query'
 import { Route as ApiHelloRouteImport } from './routes/api/hello'
 import { Route as ApiRscRouteImport } from './routes/api/rsc'
+import { Route as AuthIndexRouteImport } from './routes/auth/index'
+import { Route as AuthProtectedRouteImport } from './routes/auth/_protected'
 import { Route as NavigationOldPageRouteImport } from './routes/navigation_.old-page'
 import { Route as PathParamsIndexRouteImport } from './routes/path-params/index'
 import { Route as PathParamsPostIdRouteImport } from './routes/path-params/$postId'
@@ -54,6 +57,8 @@ import { Route as ServerComponentsIndexRouteImport } from './routes/server-compo
 import { Route as ServerComponentsCompositeRouteImport } from './routes/server-components/composite'
 import { Route as ServerComponentsWithQueryRouteImport } from './routes/server-components/with-query'
 import { Route as ApiUsersIdRouteImport } from './routes/api/users/$id'
+import { Route as AuthProtectedAdminRouteImport } from './routes/auth/_protected/admin'
+import { Route as AuthProtectedDashboardRouteImport } from './routes/auth/_protected/dashboard'
 import { Route as PathParamsFilesSplatRouteImport } from './routes/path-params/files.$'
 import { Route as PathParamsChar123LangChar125AboutRouteImport } from './routes/path-params/{-$lang}.about'
 import { Route as RoutingPathlessInsideRouteImport } from './routes/routing._pathless.inside'
@@ -61,6 +66,11 @@ import { Route as RoutingPathlessInsideRouteImport } from './routes/routing._pat
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRouteRoute = AuthRouteRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CssStylingRoute = CssStylingRouteImport.update({
@@ -203,6 +213,15 @@ const ApiRscRoute = ApiRscRouteImport.update({
   path: '/api/rsc',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthIndexRoute = AuthIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const AuthProtectedRoute = AuthProtectedRouteImport.update({
+  id: '/_protected',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
 const NavigationOldPageRoute = NavigationOldPageRouteImport.update({
   id: '/navigation_/old-page',
   path: '/navigation/old-page',
@@ -284,6 +303,16 @@ const ApiUsersIdRoute = ApiUsersIdRouteImport.update({
   path: '/api/users/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthProtectedAdminRoute = AuthProtectedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthProtectedRoute,
+} as any)
+const AuthProtectedDashboardRoute = AuthProtectedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthProtectedRoute,
+} as any)
 const PathParamsFilesSplatRoute = PathParamsFilesSplatRouteImport.update({
   id: '/path-params/files/$',
   path: '/path-params/files/$',
@@ -303,6 +332,7 @@ const RoutingPathlessInsideRoute = RoutingPathlessInsideRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRouteRouteWithChildren
   '/selective-ssr': typeof SelectiveSsrRouteRouteWithChildren
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
@@ -340,12 +370,15 @@ export interface FileRoutesByFullPath {
   '/selective-ssr/ssr-true': typeof SelectiveSsrSsrTrueRoute
   '/server-components/composite': typeof ServerComponentsCompositeRoute
   '/server-components/with-query': typeof ServerComponentsWithQueryRoute
+  '/auth/': typeof AuthIndexRoute
   '/path-params/': typeof PathParamsIndexRoute
   '/route-context/': typeof RouteContextIndexRoute
   '/routing/': typeof RoutingIndexRoute
   '/selective-ssr/': typeof SelectiveSsrIndexRoute
   '/server-components/': typeof ServerComponentsIndexRoute
   '/api/users/$id': typeof ApiUsersIdRoute
+  '/auth/admin': typeof AuthProtectedAdminRoute
+  '/auth/dashboard': typeof AuthProtectedDashboardRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
   '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/inside': typeof RoutingPathlessInsideRoute
@@ -377,6 +410,7 @@ export interface FileRoutesByTo {
   '/tanstack-query': typeof TanstackQueryRoute
   '/api/hello': typeof ApiHelloRoute
   '/api/rsc': typeof ApiRscRoute
+  '/auth': typeof AuthIndexRoute
   '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing': typeof RoutingIndexRoute
@@ -392,6 +426,8 @@ export interface FileRoutesByTo {
   '/selective-ssr': typeof SelectiveSsrIndexRoute
   '/server-components': typeof ServerComponentsIndexRoute
   '/api/users/$id': typeof ApiUsersIdRoute
+  '/auth/admin': typeof AuthProtectedAdminRoute
+  '/auth/dashboard': typeof AuthProtectedDashboardRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
   '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/inside': typeof RoutingPathlessInsideRoute
@@ -399,6 +435,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRouteRouteWithChildren
   '/selective-ssr': typeof SelectiveSsrRouteRouteWithChildren
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
@@ -427,6 +464,7 @@ export interface FileRoutesById {
   '/tanstack-query': typeof TanstackQueryRoute
   '/api/hello': typeof ApiHelloRoute
   '/api/rsc': typeof ApiRscRoute
+  '/auth/_protected': typeof AuthProtectedRouteWithChildren
   '/navigation_/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/_pathless': typeof RoutingPathlessRouteWithChildren
@@ -437,12 +475,15 @@ export interface FileRoutesById {
   '/selective-ssr/ssr-true': typeof SelectiveSsrSsrTrueRoute
   '/server-components/composite': typeof ServerComponentsCompositeRoute
   '/server-components/with-query': typeof ServerComponentsWithQueryRoute
+  '/auth/': typeof AuthIndexRoute
   '/path-params/': typeof PathParamsIndexRoute
   '/route-context/': typeof RouteContextIndexRoute
   '/routing/': typeof RoutingIndexRoute
   '/selective-ssr/': typeof SelectiveSsrIndexRoute
   '/server-components/': typeof ServerComponentsIndexRoute
   '/api/users/$id': typeof ApiUsersIdRoute
+  '/auth/_protected/admin': typeof AuthProtectedAdminRoute
+  '/auth/_protected/dashboard': typeof AuthProtectedDashboardRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
   '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/_pathless/inside': typeof RoutingPathlessInsideRoute
@@ -451,6 +492,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/selective-ssr'
     | '/css-styling'
     | '/deferred-data'
@@ -488,12 +530,15 @@ export interface FileRouteTypes {
     | '/selective-ssr/ssr-true'
     | '/server-components/composite'
     | '/server-components/with-query'
+    | '/auth/'
     | '/path-params/'
     | '/route-context/'
     | '/routing/'
     | '/selective-ssr/'
     | '/server-components/'
     | '/api/users/$id'
+    | '/auth/admin'
+    | '/auth/dashboard'
     | '/path-params/files/$'
     | '/path-params/{-$lang}/about'
     | '/routing/inside'
@@ -525,6 +570,7 @@ export interface FileRouteTypes {
     | '/tanstack-query'
     | '/api/hello'
     | '/api/rsc'
+    | '/auth'
     | '/navigation/old-page'
     | '/path-params/$postId'
     | '/routing'
@@ -540,12 +586,15 @@ export interface FileRouteTypes {
     | '/selective-ssr'
     | '/server-components'
     | '/api/users/$id'
+    | '/auth/admin'
+    | '/auth/dashboard'
     | '/path-params/files/$'
     | '/path-params/{-$lang}/about'
     | '/routing/inside'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/selective-ssr'
     | '/css-styling'
     | '/deferred-data'
@@ -574,6 +623,7 @@ export interface FileRouteTypes {
     | '/tanstack-query'
     | '/api/hello'
     | '/api/rsc'
+    | '/auth/_protected'
     | '/navigation_/old-page'
     | '/path-params/$postId'
     | '/routing/_pathless'
@@ -584,12 +634,15 @@ export interface FileRouteTypes {
     | '/selective-ssr/ssr-true'
     | '/server-components/composite'
     | '/server-components/with-query'
+    | '/auth/'
     | '/path-params/'
     | '/route-context/'
     | '/routing/'
     | '/selective-ssr/'
     | '/server-components/'
     | '/api/users/$id'
+    | '/auth/_protected/admin'
+    | '/auth/_protected/dashboard'
     | '/path-params/files/$'
     | '/path-params/{-$lang}/about'
     | '/routing/_pathless/inside'
@@ -597,6 +650,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren
   SelectiveSsrRouteRoute: typeof SelectiveSsrRouteRouteWithChildren
   CssStylingRoute: typeof CssStylingRoute
   DeferredDataRoute: typeof DeferredDataRoute
@@ -643,6 +697,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/css-styling': {
@@ -841,6 +902,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRscRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/': {
+      id: '/auth/'
+      path: '/'
+      fullPath: '/auth/'
+      preLoaderRoute: typeof AuthIndexRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/auth/_protected': {
+      id: '/auth/_protected'
+      path: ''
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthProtectedRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
     '/navigation_/old-page': {
       id: '/navigation_/old-page'
       path: '/navigation/old-page'
@@ -953,6 +1028,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiUsersIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/_protected/admin': {
+      id: '/auth/_protected/admin'
+      path: '/admin'
+      fullPath: '/auth/admin'
+      preLoaderRoute: typeof AuthProtectedAdminRouteImport
+      parentRoute: typeof AuthProtectedRoute
+    }
+    '/auth/_protected/dashboard': {
+      id: '/auth/_protected/dashboard'
+      path: '/dashboard'
+      fullPath: '/auth/dashboard'
+      preLoaderRoute: typeof AuthProtectedDashboardRouteImport
+      parentRoute: typeof AuthProtectedRoute
+    }
     '/path-params/files/$': {
       id: '/path-params/files/$'
       path: '/path-params/files/$'
@@ -976,6 +1065,34 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthProtectedRouteChildren {
+  AuthProtectedAdminRoute: typeof AuthProtectedAdminRoute
+  AuthProtectedDashboardRoute: typeof AuthProtectedDashboardRoute
+}
+
+const AuthProtectedRouteChildren: AuthProtectedRouteChildren = {
+  AuthProtectedAdminRoute: AuthProtectedAdminRoute,
+  AuthProtectedDashboardRoute: AuthProtectedDashboardRoute,
+}
+
+const AuthProtectedRouteWithChildren = AuthProtectedRoute._addFileChildren(
+  AuthProtectedRouteChildren,
+)
+
+interface AuthRouteRouteChildren {
+  AuthProtectedRoute: typeof AuthProtectedRouteWithChildren
+  AuthIndexRoute: typeof AuthIndexRoute
+}
+
+const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthProtectedRoute: AuthProtectedRouteWithChildren,
+  AuthIndexRoute: AuthIndexRoute,
+}
+
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
+  AuthRouteRouteChildren,
+)
 
 interface SelectiveSsrRouteRouteChildren {
   SelectiveSsrDataOnlyRoute: typeof SelectiveSsrDataOnlyRoute
@@ -1037,6 +1154,7 @@ const RoutingRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRouteRoute: AuthRouteRouteWithChildren,
   SelectiveSsrRouteRoute: SelectiveSsrRouteRouteWithChildren,
   CssStylingRoute: CssStylingRoute,
   DeferredDataRoute: DeferredDataRoute,

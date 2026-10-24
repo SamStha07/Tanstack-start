@@ -69,6 +69,7 @@ export const featureSections = [
   {
     title: '7. Auth & app shell',
     items: [
+      { to: '/auth', title: 'Authentication', file: 'src/routes/auth/', description: 'Cookie sessions, login/logout, protected routes and protected server functions.' },
       { to: '/entry-points', title: 'Entry points & config', file: 'src/routes/entry-points.tsx', description: 'vite.config.ts, router.tsx, start.ts, server.ts, client.tsx and __root.tsx.' },
     ],
   },
