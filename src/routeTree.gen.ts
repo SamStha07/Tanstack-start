@@ -12,9 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
 import { Route as RoutingRouteImport } from './routes/routing'
+import { Route as PathParamsIndexRouteImport } from './routes/path-params/index'
+import { Route as PathParamsPostIdRouteImport } from './routes/path-params/$postId'
 import { Route as RoutingIndexRouteImport } from './routes/routing.index'
 import { Route as RoutingPathlessRouteImport } from './routes/routing._pathless'
 import { Route as RoutingNestedRouteImport } from './routes/routing.nested'
+import { Route as PathParamsFilesSplatRouteImport } from './routes/path-params/files.$'
+import { Route as PathParamsChar123LangChar125AboutRouteImport } from './routes/path-params/{-$lang}.about'
 import { Route as RoutingPathlessInsideRouteImport } from './routes/routing._pathless.inside'
 
 const IndexRoute = IndexRouteImport.update({
@@ -32,6 +36,16 @@ const RoutingRoute = RoutingRouteImport.update({
   path: '/routing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PathParamsIndexRoute = PathParamsIndexRouteImport.update({
+  id: '/path-params/',
+  path: '/path-params/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PathParamsPostIdRoute = PathParamsPostIdRouteImport.update({
+  id: '/path-params/$postId',
+  path: '/path-params/$postId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RoutingIndexRoute = RoutingIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -46,6 +60,17 @@ const RoutingNestedRoute = RoutingNestedRouteImport.update({
   path: '/nested',
   getParentRoute: () => RoutingRoute,
 } as any)
+const PathParamsFilesSplatRoute = PathParamsFilesSplatRouteImport.update({
+  id: '/path-params/files/$',
+  path: '/path-params/files/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PathParamsChar123LangChar125AboutRoute =
+  PathParamsChar123LangChar125AboutRouteImport.update({
+    id: '/path-params/{-$lang}/about',
+    path: '/path-params/{-$lang}/about',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const RoutingPathlessInsideRoute = RoutingPathlessInsideRouteImport.update({
   id: '/inside',
   path: '/inside',
@@ -56,15 +81,23 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
   '/routing': typeof RoutingRouteWithChildren
+  '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/nested': typeof RoutingNestedRoute
+  '/path-params/': typeof PathParamsIndexRoute
   '/routing/': typeof RoutingIndexRoute
+  '/path-params/files/$': typeof PathParamsFilesSplatRoute
+  '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/inside': typeof RoutingPathlessInsideRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing': typeof RoutingIndexRoute
   '/routing/nested': typeof RoutingNestedRoute
+  '/path-params': typeof PathParamsIndexRoute
+  '/path-params/files/$': typeof PathParamsFilesSplatRoute
+  '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/inside': typeof RoutingPathlessInsideRoute
 }
 export interface FileRoutesById {
@@ -72,9 +105,13 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
   '/routing': typeof RoutingRouteWithChildren
+  '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/_pathless': typeof RoutingPathlessRouteWithChildren
   '/routing/nested': typeof RoutingNestedRoute
+  '/path-params/': typeof PathParamsIndexRoute
   '/routing/': typeof RoutingIndexRoute
+  '/path-params/files/$': typeof PathParamsFilesSplatRoute
+  '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/_pathless/inside': typeof RoutingPathlessInsideRoute
 }
 export interface FileRouteTypes {
@@ -83,19 +120,36 @@ export interface FileRouteTypes {
     | '/'
     | '/entry-points'
     | '/routing'
+    | '/path-params/$postId'
     | '/routing/nested'
+    | '/path-params/'
     | '/routing/'
+    | '/path-params/files/$'
+    | '/path-params/{-$lang}/about'
     | '/routing/inside'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/entry-points' | '/routing' | '/routing/nested' | '/routing/inside'
+  to:
+    | '/'
+    | '/entry-points'
+    | '/path-params/$postId'
+    | '/routing'
+    | '/routing/nested'
+    | '/path-params'
+    | '/path-params/files/$'
+    | '/path-params/{-$lang}/about'
+    | '/routing/inside'
   id:
     | '__root__'
     | '/'
     | '/entry-points'
     | '/routing'
+    | '/path-params/$postId'
     | '/routing/_pathless'
     | '/routing/nested'
+    | '/path-params/'
     | '/routing/'
+    | '/path-params/files/$'
+    | '/path-params/{-$lang}/about'
     | '/routing/_pathless/inside'
   fileRoutesById: FileRoutesById
 }
@@ -103,6 +157,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EntryPointsRoute: typeof EntryPointsRoute
   RoutingRoute: typeof RoutingRouteWithChildren
+  PathParamsPostIdRoute: typeof PathParamsPostIdRoute
+  PathParamsIndexRoute: typeof PathParamsIndexRoute
+  PathParamsFilesSplatRoute: typeof PathParamsFilesSplatRoute
+  PathParamsChar123LangChar125AboutRoute: typeof PathParamsChar123LangChar125AboutRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -128,6 +186,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoutingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/path-params/': {
+      id: '/path-params/'
+      path: '/path-params'
+      fullPath: '/path-params/'
+      preLoaderRoute: typeof PathParamsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/path-params/$postId': {
+      id: '/path-params/$postId'
+      path: '/path-params/$postId'
+      fullPath: '/path-params/$postId'
+      preLoaderRoute: typeof PathParamsPostIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/routing/': {
       id: '/routing/'
       path: '/'
@@ -148,6 +220,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/routing/nested'
       preLoaderRoute: typeof RoutingNestedRouteImport
       parentRoute: typeof RoutingRoute
+    }
+    '/path-params/files/$': {
+      id: '/path-params/files/$'
+      path: '/path-params/files/$'
+      fullPath: '/path-params/files/$'
+      preLoaderRoute: typeof PathParamsFilesSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/path-params/{-$lang}/about': {
+      id: '/path-params/{-$lang}/about'
+      path: '/path-params/{-$lang}/about'
+      fullPath: '/path-params/{-$lang}/about'
+      preLoaderRoute: typeof PathParamsChar123LangChar125AboutRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/routing/_pathless/inside': {
       id: '/routing/_pathless/inside'
@@ -190,6 +276,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EntryPointsRoute: EntryPointsRoute,
   RoutingRoute: RoutingRouteWithChildren,
+  PathParamsPostIdRoute: PathParamsPostIdRoute,
+  PathParamsIndexRoute: PathParamsIndexRoute,
+  PathParamsFilesSplatRoute: PathParamsFilesSplatRoute,
+  PathParamsChar123LangChar125AboutRoute:
+    PathParamsChar123LangChar125AboutRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

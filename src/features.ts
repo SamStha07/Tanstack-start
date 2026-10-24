@@ -11,6 +11,7 @@ export const featureSections = [
     title: '1. Routing basics',
     items: [
       { to: '/routing', title: 'File-based routing', file: 'src/routes/routing.tsx', description: 'How files in src/routes become URLs, layouts and nested routes with <Outlet />.' },
+      { to: '/path-params', title: 'Path params', file: 'src/routes/path-params/', description: 'Dynamic segments like /path-params/$postId, optional and splat ($) params.' },
     ],
   },
   {
