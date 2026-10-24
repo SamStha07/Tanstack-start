@@ -24,8 +24,10 @@ import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
 import { Route as ServerFunctionsRouteImport } from './routes/server-functions'
+import { Route as ServerRoutesRouteImport } from './routes/server-routes'
 import { Route as StreamingRouteImport } from './routes/streaming'
 import { Route as TanstackQueryRouteImport } from './routes/tanstack-query'
+import { Route as ApiHelloRouteImport } from './routes/api/hello'
 import { Route as NavigationOldPageRouteImport } from './routes/navigation_.old-page'
 import { Route as PathParamsIndexRouteImport } from './routes/path-params/index'
 import { Route as PathParamsPostIdRouteImport } from './routes/path-params/$postId'
@@ -33,6 +35,7 @@ import { Route as RouteContextIndexRouteImport } from './routes/route-context.in
 import { Route as RoutingIndexRouteImport } from './routes/routing.index'
 import { Route as RoutingPathlessRouteImport } from './routes/routing._pathless'
 import { Route as RoutingNestedRouteImport } from './routes/routing.nested'
+import { Route as ApiUsersIdRouteImport } from './routes/api/users/$id'
 import { Route as PathParamsFilesSplatRouteImport } from './routes/path-params/files.$'
 import { Route as PathParamsChar123LangChar125AboutRouteImport } from './routes/path-params/{-$lang}.about'
 import { Route as RoutingPathlessInsideRouteImport } from './routes/routing._pathless.inside'
@@ -112,6 +115,11 @@ const ServerFunctionsRoute = ServerFunctionsRouteImport.update({
   path: '/server-functions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServerRoutesRoute = ServerRoutesRouteImport.update({
+  id: '/server-routes',
+  path: '/server-routes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StreamingRoute = StreamingRouteImport.update({
   id: '/streaming',
   path: '/streaming',
@@ -120,6 +128,11 @@ const StreamingRoute = StreamingRouteImport.update({
 const TanstackQueryRoute = TanstackQueryRouteImport.update({
   id: '/tanstack-query',
   path: '/tanstack-query',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiHelloRoute = ApiHelloRouteImport.update({
+  id: '/api/hello',
+  path: '/api/hello',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NavigationOldPageRoute = NavigationOldPageRouteImport.update({
@@ -156,6 +169,11 @@ const RoutingNestedRoute = RoutingNestedRouteImport.update({
   path: '/nested',
   getParentRoute: () => RoutingRoute,
 } as any)
+const ApiUsersIdRoute = ApiUsersIdRouteImport.update({
+  id: '/api/users/$id',
+  path: '/api/users/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PathParamsFilesSplatRoute = PathParamsFilesSplatRouteImport.update({
   id: '/path-params/files/$',
   path: '/path-params/files/$',
@@ -189,14 +207,17 @@ export interface FileRoutesByFullPath {
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
+  '/server-routes': typeof ServerRoutesRoute
   '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
+  '/api/hello': typeof ApiHelloRoute
   '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/nested': typeof RoutingNestedRoute
   '/path-params/': typeof PathParamsIndexRoute
   '/route-context/': typeof RouteContextIndexRoute
   '/routing/': typeof RoutingIndexRoute
+  '/api/users/$id': typeof ApiUsersIdRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
   '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/inside': typeof RoutingPathlessInsideRoute
@@ -215,14 +236,17 @@ export interface FileRoutesByTo {
   '/request-response': typeof RequestResponseRoute
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
+  '/server-routes': typeof ServerRoutesRoute
   '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
+  '/api/hello': typeof ApiHelloRoute
   '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing': typeof RoutingIndexRoute
   '/routing/nested': typeof RoutingNestedRoute
   '/path-params': typeof PathParamsIndexRoute
   '/route-context': typeof RouteContextIndexRoute
+  '/api/users/$id': typeof ApiUsersIdRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
   '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/inside': typeof RoutingPathlessInsideRoute
@@ -244,8 +268,10 @@ export interface FileRoutesById {
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
+  '/server-routes': typeof ServerRoutesRoute
   '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
+  '/api/hello': typeof ApiHelloRoute
   '/navigation_/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/_pathless': typeof RoutingPathlessRouteWithChildren
@@ -253,6 +279,7 @@ export interface FileRoutesById {
   '/path-params/': typeof PathParamsIndexRoute
   '/route-context/': typeof RouteContextIndexRoute
   '/routing/': typeof RoutingIndexRoute
+  '/api/users/$id': typeof ApiUsersIdRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
   '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/_pathless/inside': typeof RoutingPathlessInsideRoute
@@ -275,14 +302,17 @@ export interface FileRouteTypes {
     | '/routing'
     | '/search-params'
     | '/server-functions'
+    | '/server-routes'
     | '/streaming'
     | '/tanstack-query'
+    | '/api/hello'
     | '/navigation/old-page'
     | '/path-params/$postId'
     | '/routing/nested'
     | '/path-params/'
     | '/route-context/'
     | '/routing/'
+    | '/api/users/$id'
     | '/path-params/files/$'
     | '/path-params/{-$lang}/about'
     | '/routing/inside'
@@ -301,14 +331,17 @@ export interface FileRouteTypes {
     | '/request-response'
     | '/search-params'
     | '/server-functions'
+    | '/server-routes'
     | '/streaming'
     | '/tanstack-query'
+    | '/api/hello'
     | '/navigation/old-page'
     | '/path-params/$postId'
     | '/routing'
     | '/routing/nested'
     | '/path-params'
     | '/route-context'
+    | '/api/users/$id'
     | '/path-params/files/$'
     | '/path-params/{-$lang}/about'
     | '/routing/inside'
@@ -329,8 +362,10 @@ export interface FileRouteTypes {
     | '/routing'
     | '/search-params'
     | '/server-functions'
+    | '/server-routes'
     | '/streaming'
     | '/tanstack-query'
+    | '/api/hello'
     | '/navigation_/old-page'
     | '/path-params/$postId'
     | '/routing/_pathless'
@@ -338,6 +373,7 @@ export interface FileRouteTypes {
     | '/path-params/'
     | '/route-context/'
     | '/routing/'
+    | '/api/users/$id'
     | '/path-params/files/$'
     | '/path-params/{-$lang}/about'
     | '/routing/_pathless/inside'
@@ -359,11 +395,14 @@ export interface RootRouteChildren {
   RoutingRoute: typeof RoutingRouteWithChildren
   SearchParamsRoute: typeof SearchParamsRoute
   ServerFunctionsRoute: typeof ServerFunctionsRoute
+  ServerRoutesRoute: typeof ServerRoutesRoute
   StreamingRoute: typeof StreamingRoute
   TanstackQueryRoute: typeof TanstackQueryRoute
+  ApiHelloRoute: typeof ApiHelloRoute
   NavigationOldPageRoute: typeof NavigationOldPageRoute
   PathParamsPostIdRoute: typeof PathParamsPostIdRoute
   PathParamsIndexRoute: typeof PathParamsIndexRoute
+  ApiUsersIdRoute: typeof ApiUsersIdRoute
   PathParamsFilesSplatRoute: typeof PathParamsFilesSplatRoute
   PathParamsChar123LangChar125AboutRoute: typeof PathParamsChar123LangChar125AboutRoute
 }
@@ -475,6 +514,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServerFunctionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/server-routes': {
+      id: '/server-routes'
+      path: '/server-routes'
+      fullPath: '/server-routes'
+      preLoaderRoute: typeof ServerRoutesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/streaming': {
       id: '/streaming'
       path: '/streaming'
@@ -487,6 +533,13 @@ declare module '@tanstack/react-router' {
       path: '/tanstack-query'
       fullPath: '/tanstack-query'
       preLoaderRoute: typeof TanstackQueryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/hello': {
+      id: '/api/hello'
+      path: '/api/hello'
+      fullPath: '/api/hello'
+      preLoaderRoute: typeof ApiHelloRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/navigation_/old-page': {
@@ -537,6 +590,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/routing/nested'
       preLoaderRoute: typeof RoutingNestedRouteImport
       parentRoute: typeof RoutingRoute
+    }
+    '/api/users/$id': {
+      id: '/api/users/$id'
+      path: '/api/users/$id'
+      fullPath: '/api/users/$id'
+      preLoaderRoute: typeof ApiUsersIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/path-params/files/$': {
       id: '/path-params/files/$'
@@ -617,11 +677,14 @@ const rootRouteChildren: RootRouteChildren = {
   RoutingRoute: RoutingRouteWithChildren,
   SearchParamsRoute: SearchParamsRoute,
   ServerFunctionsRoute: ServerFunctionsRoute,
+  ServerRoutesRoute: ServerRoutesRoute,
   StreamingRoute: StreamingRoute,
   TanstackQueryRoute: TanstackQueryRoute,
+  ApiHelloRoute: ApiHelloRoute,
   NavigationOldPageRoute: NavigationOldPageRoute,
   PathParamsPostIdRoute: PathParamsPostIdRoute,
   PathParamsIndexRoute: PathParamsIndexRoute,
+  ApiUsersIdRoute: ApiUsersIdRoute,
   PathParamsFilesSplatRoute: PathParamsFilesSplatRoute,
   PathParamsChar123LangChar125AboutRoute:
     PathParamsChar123LangChar125AboutRoute,
