@@ -19,6 +19,12 @@ export const featureSections = [
     ],
   },
   {
+    title: '2. Data loading',
+    items: [
+      { to: '/loaders', title: 'Route loaders', file: 'src/routes/loaders.tsx', description: 'loader, loaderDeps, staleTime, pending UI and caching.' },
+    ],
+  },
+  {
     title: '7. Auth & app shell',
     items: [
       { to: '/entry-points', title: 'Entry points & config', file: 'src/routes/entry-points.tsx', description: 'vite.config.ts, router.tsx, start.ts, server.ts, client.tsx and __root.tsx.' },

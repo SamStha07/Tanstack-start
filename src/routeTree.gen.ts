@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CssStylingRouteImport } from './routes/css-styling'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
 import { Route as HeadSeoRouteImport } from './routes/head-seo'
+import { Route as LoadersRouteImport } from './routes/loaders'
 import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
@@ -44,6 +45,11 @@ const EntryPointsRoute = EntryPointsRouteImport.update({
 const HeadSeoRoute = HeadSeoRouteImport.update({
   id: '/head-seo',
   path: '/head-seo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoadersRoute = LoadersRouteImport.update({
+  id: '/loaders',
+  path: '/loaders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RouteContextRoute = RouteContextRouteImport.update({
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/css-styling': typeof CssStylingRoute
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
+  '/loaders': typeof LoadersRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/css-styling': typeof CssStylingRoute
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
+  '/loaders': typeof LoadersRoute
   '/search-params': typeof SearchParamsRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing': typeof RoutingIndexRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/css-styling': typeof CssStylingRoute
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
+  '/loaders': typeof LoadersRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/css-styling'
     | '/entry-points'
     | '/head-seo'
+    | '/loaders'
     | '/route-context'
     | '/routing'
     | '/search-params'
@@ -182,6 +192,7 @@ export interface FileRouteTypes {
     | '/css-styling'
     | '/entry-points'
     | '/head-seo'
+    | '/loaders'
     | '/search-params'
     | '/path-params/$postId'
     | '/routing'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/css-styling'
     | '/entry-points'
     | '/head-seo'
+    | '/loaders'
     | '/route-context'
     | '/routing'
     | '/search-params'
@@ -216,6 +228,7 @@ export interface RootRouteChildren {
   CssStylingRoute: typeof CssStylingRoute
   EntryPointsRoute: typeof EntryPointsRoute
   HeadSeoRoute: typeof HeadSeoRoute
+  LoadersRoute: typeof LoadersRoute
   RouteContextRoute: typeof RouteContextRouteWithChildren
   RoutingRoute: typeof RoutingRouteWithChildren
   SearchParamsRoute: typeof SearchParamsRoute
@@ -253,6 +266,13 @@ declare module '@tanstack/react-router' {
       path: '/head-seo'
       fullPath: '/head-seo'
       preLoaderRoute: typeof HeadSeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loaders': {
+      id: '/loaders'
+      path: '/loaders'
+      fullPath: '/loaders'
+      preLoaderRoute: typeof LoadersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/route-context': {
@@ -386,6 +406,7 @@ const rootRouteChildren: RootRouteChildren = {
   CssStylingRoute: CssStylingRoute,
   EntryPointsRoute: EntryPointsRoute,
   HeadSeoRoute: HeadSeoRoute,
+  LoadersRoute: LoadersRoute,
   RouteContextRoute: RouteContextRouteWithChildren,
   RoutingRoute: RoutingRouteWithChildren,
   SearchParamsRoute: SearchParamsRoute,
