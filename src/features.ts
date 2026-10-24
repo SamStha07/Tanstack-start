@@ -63,6 +63,7 @@ export const featureSections = [
       { to: '/deferred-hydration', title: 'Deferred hydration', file: 'src/routes/deferred-hydration.tsx', description: 'Keep SSR HTML but hydrate later with <Hydrate when={visible()}>.' },
       { to: '/static-prerendering', title: 'Static prerendering', file: 'src/routes/static-prerendering.tsx', description: 'Pages rendered to HTML at build time.' },
       { to: '/isr', title: 'ISR & cache headers', file: 'src/routes/isr.tsx', description: 'Incremental static regeneration with Cache-Control headers.' },
+      { to: '/spa-mode', title: 'SPA mode', file: 'src/routes/spa-mode.tsx', description: 'Turning SSR off for the whole app.' },
     ],
   },
   {

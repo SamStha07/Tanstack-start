@@ -31,6 +31,7 @@ import { Route as SearchParamsRouteImport } from './routes/search-params'
 import { Route as SelectiveSsrRouteRouteImport } from './routes/selective-ssr/route'
 import { Route as ServerFunctionsRouteImport } from './routes/server-functions'
 import { Route as ServerRoutesRouteImport } from './routes/server-routes'
+import { Route as SpaModeRouteImport } from './routes/spa-mode'
 import { Route as StaticPrerenderingRouteImport } from './routes/static-prerendering'
 import { Route as StaticServerFunctionsRouteImport } from './routes/static-server-functions'
 import { Route as StreamingRouteImport } from './routes/streaming'
@@ -165,6 +166,11 @@ const ServerFunctionsRoute = ServerFunctionsRouteImport.update({
 const ServerRoutesRoute = ServerRoutesRouteImport.update({
   id: '/server-routes',
   path: '/server-routes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpaModeRoute = SpaModeRouteImport.update({
+  id: '/spa-mode',
+  path: '/spa-mode',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StaticPrerenderingRoute = StaticPrerenderingRouteImport.update({
@@ -318,6 +324,7 @@ export interface FileRoutesByFullPath {
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
   '/server-routes': typeof ServerRoutesRoute
+  '/spa-mode': typeof SpaModeRoute
   '/static-prerendering': typeof StaticPrerenderingRoute
   '/static-server-functions': typeof StaticServerFunctionsRoute
   '/streaming': typeof StreamingRoute
@@ -363,6 +370,7 @@ export interface FileRoutesByTo {
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
   '/server-routes': typeof ServerRoutesRoute
+  '/spa-mode': typeof SpaModeRoute
   '/static-prerendering': typeof StaticPrerenderingRoute
   '/static-server-functions': typeof StaticServerFunctionsRoute
   '/streaming': typeof StreamingRoute
@@ -412,6 +420,7 @@ export interface FileRoutesById {
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
   '/server-routes': typeof ServerRoutesRoute
+  '/spa-mode': typeof SpaModeRoute
   '/static-prerendering': typeof StaticPrerenderingRoute
   '/static-server-functions': typeof StaticServerFunctionsRoute
   '/streaming': typeof StreamingRoute
@@ -463,6 +472,7 @@ export interface FileRouteTypes {
     | '/search-params'
     | '/server-functions'
     | '/server-routes'
+    | '/spa-mode'
     | '/static-prerendering'
     | '/static-server-functions'
     | '/streaming'
@@ -508,6 +518,7 @@ export interface FileRouteTypes {
     | '/search-params'
     | '/server-functions'
     | '/server-routes'
+    | '/spa-mode'
     | '/static-prerendering'
     | '/static-server-functions'
     | '/streaming'
@@ -556,6 +567,7 @@ export interface FileRouteTypes {
     | '/search-params'
     | '/server-functions'
     | '/server-routes'
+    | '/spa-mode'
     | '/static-prerendering'
     | '/static-server-functions'
     | '/streaming'
@@ -606,6 +618,7 @@ export interface RootRouteChildren {
   SearchParamsRoute: typeof SearchParamsRoute
   ServerFunctionsRoute: typeof ServerFunctionsRoute
   ServerRoutesRoute: typeof ServerRoutesRoute
+  SpaModeRoute: typeof SpaModeRoute
   StaticPrerenderingRoute: typeof StaticPrerenderingRoute
   StaticServerFunctionsRoute: typeof StaticServerFunctionsRoute
   StreamingRoute: typeof StreamingRoute
@@ -777,6 +790,13 @@ declare module '@tanstack/react-router' {
       path: '/server-routes'
       fullPath: '/server-routes'
       preLoaderRoute: typeof ServerRoutesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/spa-mode': {
+      id: '/spa-mode'
+      path: '/spa-mode'
+      fullPath: '/spa-mode'
+      preLoaderRoute: typeof SpaModeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/static-prerendering': {
@@ -1038,6 +1058,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchParamsRoute: SearchParamsRoute,
   ServerFunctionsRoute: ServerFunctionsRoute,
   ServerRoutesRoute: ServerRoutesRoute,
+  SpaModeRoute: SpaModeRoute,
   StaticPrerenderingRoute: StaticPrerenderingRoute,
   StaticServerFunctionsRoute: StaticServerFunctionsRoute,
   StreamingRoute: StreamingRoute,
