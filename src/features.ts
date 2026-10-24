@@ -53,6 +53,7 @@ export const featureSections = [
     items: [
       { to: '/execution-model', title: 'Where does code run?', file: 'src/routes/execution-model.tsx', description: 'createIsomorphicFn, createServerOnlyFn, createClientOnlyFn and import protection.' },
       { to: '/environment-variables', title: 'Environment variables', file: 'src/routes/environment-variables.tsx', description: 'VITE_ variables vs server-only process.env secrets.' },
+      { to: '/hydration', title: 'Hydration & ClientOnly', file: 'src/routes/hydration.tsx', description: 'useHydrated, <ClientOnly> and avoiding hydration mismatches.' },
     ],
   },
   {
