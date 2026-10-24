@@ -1,0 +1,14 @@
+/* A CSS Module: class names are scoped (hashed) per file, so `.box` here can
+   never clash with a `.box` anywhere else. Used by src/routes/css-styling.tsx.
+   The "-components" folder starts with "-", so the router ignores it — handy
+   for colocating files next to routes. */
+.box {
+  border: 2px solid #8b5cf6;
+  border-radius: 12px;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(45, 212, 191, 0.12));
+}
+.title {
+  margin: 0 0 0.25rem;
+  color: #8b5cf6;
+}

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CssStylingRouteImport } from './routes/css-styling'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
 import { Route as HeadSeoRouteImport } from './routes/head-seo'
 import { Route as RouteContextRouteImport } from './routes/route-context'
@@ -28,6 +29,11 @@ import { Route as RoutingPathlessInsideRouteImport } from './routes/routing._pat
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CssStylingRoute = CssStylingRouteImport.update({
+  id: '/css-styling',
+  path: '/css-styling',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EntryPointsRoute = EntryPointsRouteImport.update({
@@ -103,6 +109,7 @@ const RoutingPathlessInsideRoute = RoutingPathlessInsideRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/css-styling': typeof CssStylingRoute
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
   '/route-context': typeof RouteContextRouteWithChildren
@@ -119,6 +126,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/css-styling': typeof CssStylingRoute
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
   '/search-params': typeof SearchParamsRoute
@@ -134,6 +142,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/css-styling': typeof CssStylingRoute
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
   '/route-context': typeof RouteContextRouteWithChildren
@@ -153,6 +162,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/css-styling'
     | '/entry-points'
     | '/head-seo'
     | '/route-context'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/css-styling'
     | '/entry-points'
     | '/head-seo'
     | '/search-params'
@@ -183,6 +194,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/css-styling'
     | '/entry-points'
     | '/head-seo'
     | '/route-context'
@@ -201,6 +213,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CssStylingRoute: typeof CssStylingRoute
   EntryPointsRoute: typeof EntryPointsRoute
   HeadSeoRoute: typeof HeadSeoRoute
   RouteContextRoute: typeof RouteContextRouteWithChildren
@@ -219,6 +232,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/css-styling': {
+      id: '/css-styling'
+      path: '/css-styling'
+      fullPath: '/css-styling'
+      preLoaderRoute: typeof CssStylingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/entry-points': {
@@ -363,6 +383,7 @@ const RoutingRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CssStylingRoute: CssStylingRoute,
   EntryPointsRoute: EntryPointsRoute,
   HeadSeoRoute: HeadSeoRoute,
   RouteContextRoute: RouteContextRouteWithChildren,
