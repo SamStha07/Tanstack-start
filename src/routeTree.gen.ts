@@ -14,9 +14,11 @@ import { Route as CssStylingRouteImport } from './routes/css-styling'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
 import { Route as HeadSeoRouteImport } from './routes/head-seo'
 import { Route as LoadersRouteImport } from './routes/loaders'
+import { Route as NavigationRouteImport } from './routes/navigation'
 import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
+import { Route as NavigationOldPageRouteImport } from './routes/navigation_.old-page'
 import { Route as PathParamsIndexRouteImport } from './routes/path-params/index'
 import { Route as PathParamsPostIdRouteImport } from './routes/path-params/$postId'
 import { Route as RouteContextIndexRouteImport } from './routes/route-context.index'
@@ -52,6 +54,11 @@ const LoadersRoute = LoadersRouteImport.update({
   path: '/loaders',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NavigationRoute = NavigationRouteImport.update({
+  id: '/navigation',
+  path: '/navigation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RouteContextRoute = RouteContextRouteImport.update({
   id: '/route-context',
   path: '/route-context',
@@ -65,6 +72,11 @@ const RoutingRoute = RoutingRouteImport.update({
 const SearchParamsRoute = SearchParamsRouteImport.update({
   id: '/search-params',
   path: '/search-params',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NavigationOldPageRoute = NavigationOldPageRouteImport.update({
+  id: '/navigation_/old-page',
+  path: '/navigation/old-page',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PathParamsIndexRoute = PathParamsIndexRouteImport.update({
@@ -119,9 +131,11 @@ export interface FileRoutesByFullPath {
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
+  '/navigation': typeof NavigationRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
+  '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/nested': typeof RoutingNestedRoute
   '/path-params/': typeof PathParamsIndexRoute
@@ -137,7 +151,9 @@ export interface FileRoutesByTo {
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
+  '/navigation': typeof NavigationRoute
   '/search-params': typeof SearchParamsRoute
+  '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing': typeof RoutingIndexRoute
   '/routing/nested': typeof RoutingNestedRoute
@@ -154,9 +170,11 @@ export interface FileRoutesById {
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
+  '/navigation': typeof NavigationRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
+  '/navigation_/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/_pathless': typeof RoutingPathlessRouteWithChildren
   '/routing/nested': typeof RoutingNestedRoute
@@ -175,9 +193,11 @@ export interface FileRouteTypes {
     | '/entry-points'
     | '/head-seo'
     | '/loaders'
+    | '/navigation'
     | '/route-context'
     | '/routing'
     | '/search-params'
+    | '/navigation/old-page'
     | '/path-params/$postId'
     | '/routing/nested'
     | '/path-params/'
@@ -193,7 +213,9 @@ export interface FileRouteTypes {
     | '/entry-points'
     | '/head-seo'
     | '/loaders'
+    | '/navigation'
     | '/search-params'
+    | '/navigation/old-page'
     | '/path-params/$postId'
     | '/routing'
     | '/routing/nested'
@@ -209,9 +231,11 @@ export interface FileRouteTypes {
     | '/entry-points'
     | '/head-seo'
     | '/loaders'
+    | '/navigation'
     | '/route-context'
     | '/routing'
     | '/search-params'
+    | '/navigation_/old-page'
     | '/path-params/$postId'
     | '/routing/_pathless'
     | '/routing/nested'
@@ -229,9 +253,11 @@ export interface RootRouteChildren {
   EntryPointsRoute: typeof EntryPointsRoute
   HeadSeoRoute: typeof HeadSeoRoute
   LoadersRoute: typeof LoadersRoute
+  NavigationRoute: typeof NavigationRoute
   RouteContextRoute: typeof RouteContextRouteWithChildren
   RoutingRoute: typeof RoutingRouteWithChildren
   SearchParamsRoute: typeof SearchParamsRoute
+  NavigationOldPageRoute: typeof NavigationOldPageRoute
   PathParamsPostIdRoute: typeof PathParamsPostIdRoute
   PathParamsIndexRoute: typeof PathParamsIndexRoute
   PathParamsFilesSplatRoute: typeof PathParamsFilesSplatRoute
@@ -275,6 +301,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoadersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/navigation': {
+      id: '/navigation'
+      path: '/navigation'
+      fullPath: '/navigation'
+      preLoaderRoute: typeof NavigationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/route-context': {
       id: '/route-context'
       path: '/route-context'
@@ -294,6 +327,13 @@ declare module '@tanstack/react-router' {
       path: '/search-params'
       fullPath: '/search-params'
       preLoaderRoute: typeof SearchParamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/navigation_/old-page': {
+      id: '/navigation_/old-page'
+      path: '/navigation/old-page'
+      fullPath: '/navigation/old-page'
+      preLoaderRoute: typeof NavigationOldPageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/path-params/': {
@@ -407,9 +447,11 @@ const rootRouteChildren: RootRouteChildren = {
   EntryPointsRoute: EntryPointsRoute,
   HeadSeoRoute: HeadSeoRoute,
   LoadersRoute: LoadersRoute,
+  NavigationRoute: NavigationRoute,
   RouteContextRoute: RouteContextRouteWithChildren,
   RoutingRoute: RoutingRouteWithChildren,
   SearchParamsRoute: SearchParamsRoute,
+  NavigationOldPageRoute: NavigationOldPageRoute,
   PathParamsPostIdRoute: PathParamsPostIdRoute,
   PathParamsIndexRoute: PathParamsIndexRoute,
   PathParamsFilesSplatRoute: PathParamsFilesSplatRoute,
