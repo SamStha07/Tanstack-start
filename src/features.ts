@@ -32,6 +32,7 @@ export const featureSections = [
     title: '3. Server',
     items: [
       { to: '/server-functions', title: 'Server functions', file: 'src/routes/server-functions.tsx', description: 'createServerFn: type-safe RPCs, GET vs POST, validation, useServerFn.' },
+      { to: '/forms', title: 'Forms & FormData', file: 'src/routes/forms.tsx', description: 'Posting native <form> FormData to a server function.' },
     ],
   },
   {
