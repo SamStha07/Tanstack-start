@@ -30,7 +30,7 @@ export default defineConfig({
         crawlLinks: false,
         autoStaticPathsDiscovery: false,
       },
-      pages: [{ path: '/static-prerendering' }],
+      pages: [{ path: '/static-prerendering' }, { path: '/static-server-functions' }],
 
       // SPA mode (turns off SSR for every page). See /spa-mode.
       // spa: { enabled: true },

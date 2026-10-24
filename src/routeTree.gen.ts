@@ -26,6 +26,7 @@ import { Route as SearchParamsRouteImport } from './routes/search-params'
 import { Route as ServerFunctionsRouteImport } from './routes/server-functions'
 import { Route as ServerRoutesRouteImport } from './routes/server-routes'
 import { Route as StaticPrerenderingRouteImport } from './routes/static-prerendering'
+import { Route as StaticServerFunctionsRouteImport } from './routes/static-server-functions'
 import { Route as StreamingRouteImport } from './routes/streaming'
 import { Route as TanstackQueryRouteImport } from './routes/tanstack-query'
 import { Route as ApiHelloRouteImport } from './routes/api/hello'
@@ -126,6 +127,11 @@ const StaticPrerenderingRoute = StaticPrerenderingRouteImport.update({
   path: '/static-prerendering',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaticServerFunctionsRoute = StaticServerFunctionsRouteImport.update({
+  id: '/static-server-functions',
+  path: '/static-server-functions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StreamingRoute = StreamingRouteImport.update({
   id: '/streaming',
   path: '/streaming',
@@ -215,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/server-functions': typeof ServerFunctionsRoute
   '/server-routes': typeof ServerRoutesRoute
   '/static-prerendering': typeof StaticPrerenderingRoute
+  '/static-server-functions': typeof StaticServerFunctionsRoute
   '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
   '/api/hello': typeof ApiHelloRoute
@@ -245,6 +252,7 @@ export interface FileRoutesByTo {
   '/server-functions': typeof ServerFunctionsRoute
   '/server-routes': typeof ServerRoutesRoute
   '/static-prerendering': typeof StaticPrerenderingRoute
+  '/static-server-functions': typeof StaticServerFunctionsRoute
   '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
   '/api/hello': typeof ApiHelloRoute
@@ -278,6 +286,7 @@ export interface FileRoutesById {
   '/server-functions': typeof ServerFunctionsRoute
   '/server-routes': typeof ServerRoutesRoute
   '/static-prerendering': typeof StaticPrerenderingRoute
+  '/static-server-functions': typeof StaticServerFunctionsRoute
   '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
   '/api/hello': typeof ApiHelloRoute
@@ -313,6 +322,7 @@ export interface FileRouteTypes {
     | '/server-functions'
     | '/server-routes'
     | '/static-prerendering'
+    | '/static-server-functions'
     | '/streaming'
     | '/tanstack-query'
     | '/api/hello'
@@ -343,6 +353,7 @@ export interface FileRouteTypes {
     | '/server-functions'
     | '/server-routes'
     | '/static-prerendering'
+    | '/static-server-functions'
     | '/streaming'
     | '/tanstack-query'
     | '/api/hello'
@@ -375,6 +386,7 @@ export interface FileRouteTypes {
     | '/server-functions'
     | '/server-routes'
     | '/static-prerendering'
+    | '/static-server-functions'
     | '/streaming'
     | '/tanstack-query'
     | '/api/hello'
@@ -409,6 +421,7 @@ export interface RootRouteChildren {
   ServerFunctionsRoute: typeof ServerFunctionsRoute
   ServerRoutesRoute: typeof ServerRoutesRoute
   StaticPrerenderingRoute: typeof StaticPrerenderingRoute
+  StaticServerFunctionsRoute: typeof StaticServerFunctionsRoute
   StreamingRoute: typeof StreamingRoute
   TanstackQueryRoute: typeof TanstackQueryRoute
   ApiHelloRoute: typeof ApiHelloRoute
@@ -539,6 +552,13 @@ declare module '@tanstack/react-router' {
       path: '/static-prerendering'
       fullPath: '/static-prerendering'
       preLoaderRoute: typeof StaticPrerenderingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/static-server-functions': {
+      id: '/static-server-functions'
+      path: '/static-server-functions'
+      fullPath: '/static-server-functions'
+      preLoaderRoute: typeof StaticServerFunctionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/streaming': {
@@ -699,6 +719,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServerFunctionsRoute: ServerFunctionsRoute,
   ServerRoutesRoute: ServerRoutesRoute,
   StaticPrerenderingRoute: StaticPrerenderingRoute,
+  StaticServerFunctionsRoute: StaticServerFunctionsRoute,
   StreamingRoute: StreamingRoute,
   TanstackQueryRoute: TanstackQueryRoute,
   ApiHelloRoute: ApiHelloRoute,

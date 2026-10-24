@@ -37,6 +37,7 @@ export const featureSections = [
       { to: '/middleware', title: 'Middleware', file: 'src/routes/middleware.tsx', description: 'Request vs function middleware, context, sendContext and global middleware.' },
       { to: '/request-response', title: 'Request & response utils', file: 'src/routes/request-response.tsx', description: 'Read headers / cookies, set status, headers and cookies from the server.' },
       { to: '/server-routes', title: 'Server routes (API)', file: 'src/routes/server-routes.tsx', description: 'Raw HTTP endpoints like /api/hello living next to your pages.' },
+      { to: '/static-server-functions', title: 'Static server functions', file: 'src/routes/static-server-functions.tsx', description: 'Server functions executed at build time and served as static JSON.' },
     ],
   },
   {
