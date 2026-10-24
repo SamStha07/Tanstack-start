@@ -14,6 +14,7 @@ export const featureSections = [
       { to: '/path-params', title: 'Path params', file: 'src/routes/path-params/', description: 'Dynamic segments like /path-params/$postId, optional and splat ($) params.' },
       { to: '/search-params', title: 'Search params', file: 'src/routes/search-params.tsx', description: 'Validated, typed URL query state with validateSearch + zod.' },
       { to: '/route-context', title: 'Route context & beforeLoad', file: 'src/routes/route-context.tsx', description: 'Dependency injection through the route tree and running code before a route loads.' },
+      { to: '/head-seo', title: 'Head & SEO', file: 'src/routes/head-seo.tsx', description: 'Per-route <title>, meta tags, links and scripts with the head() option.' },
     ],
   },
   {

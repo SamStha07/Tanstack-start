@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
+import { Route as HeadSeoRouteImport } from './routes/head-seo'
 import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
@@ -32,6 +33,11 @@ const IndexRoute = IndexRouteImport.update({
 const EntryPointsRoute = EntryPointsRouteImport.update({
   id: '/entry-points',
   path: '/entry-points',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeadSeoRoute = HeadSeoRouteImport.update({
+  id: '/head-seo',
+  path: '/head-seo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RouteContextRoute = RouteContextRouteImport.update({
@@ -98,6 +104,7 @@ const RoutingPathlessInsideRoute = RoutingPathlessInsideRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/head-seo': typeof HeadSeoRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/head-seo': typeof HeadSeoRoute
   '/search-params': typeof SearchParamsRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing': typeof RoutingIndexRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/head-seo': typeof HeadSeoRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/entry-points'
+    | '/head-seo'
     | '/route-context'
     | '/routing'
     | '/search-params'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/entry-points'
+    | '/head-seo'
     | '/search-params'
     | '/path-params/$postId'
     | '/routing'
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/entry-points'
+    | '/head-seo'
     | '/route-context'
     | '/routing'
     | '/search-params'
@@ -190,6 +202,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EntryPointsRoute: typeof EntryPointsRoute
+  HeadSeoRoute: typeof HeadSeoRoute
   RouteContextRoute: typeof RouteContextRouteWithChildren
   RoutingRoute: typeof RoutingRouteWithChildren
   SearchParamsRoute: typeof SearchParamsRoute
@@ -213,6 +226,13 @@ declare module '@tanstack/react-router' {
       path: '/entry-points'
       fullPath: '/entry-points'
       preLoaderRoute: typeof EntryPointsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/head-seo': {
+      id: '/head-seo'
+      path: '/head-seo'
+      fullPath: '/head-seo'
+      preLoaderRoute: typeof HeadSeoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/route-context': {
@@ -344,6 +364,7 @@ const RoutingRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EntryPointsRoute: EntryPointsRoute,
+  HeadSeoRoute: HeadSeoRoute,
   RouteContextRoute: RouteContextRouteWithChildren,
   RoutingRoute: RoutingRouteWithChildren,
   SearchParamsRoute: SearchParamsRoute,
