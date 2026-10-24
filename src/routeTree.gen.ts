@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CssStylingRouteImport } from './routes/css-styling'
 import { Route as DeferredDataRouteImport } from './routes/deferred-data'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
+import { Route as EnvironmentVariablesRouteImport } from './routes/environment-variables'
 import { Route as ErrorHandlingRouteImport } from './routes/error-handling'
 import { Route as ExecutionModelRouteImport } from './routes/execution-model'
 import { Route as FormsRouteImport } from './routes/forms'
@@ -65,6 +66,11 @@ const DeferredDataRoute = DeferredDataRouteImport.update({
 const EntryPointsRoute = EntryPointsRouteImport.update({
   id: '/entry-points',
   path: '/entry-points',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnvironmentVariablesRoute = EnvironmentVariablesRouteImport.update({
+  id: '/environment-variables',
+  path: '/environment-variables',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ErrorHandlingRoute = ErrorHandlingRouteImport.update({
@@ -240,6 +246,7 @@ export interface FileRoutesByFullPath {
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
+  '/environment-variables': typeof EnvironmentVariablesRoute
   '/error-handling': typeof ErrorHandlingRoute
   '/execution-model': typeof ExecutionModelRoute
   '/forms': typeof FormsRoute
@@ -278,6 +285,7 @@ export interface FileRoutesByTo {
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
+  '/environment-variables': typeof EnvironmentVariablesRoute
   '/error-handling': typeof ErrorHandlingRoute
   '/execution-model': typeof ExecutionModelRoute
   '/forms': typeof FormsRoute
@@ -315,6 +323,7 @@ export interface FileRoutesById {
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
+  '/environment-variables': typeof EnvironmentVariablesRoute
   '/error-handling': typeof ErrorHandlingRoute
   '/execution-model': typeof ExecutionModelRoute
   '/forms': typeof FormsRoute
@@ -356,6 +365,7 @@ export interface FileRouteTypes {
     | '/css-styling'
     | '/deferred-data'
     | '/entry-points'
+    | '/environment-variables'
     | '/error-handling'
     | '/execution-model'
     | '/forms'
@@ -394,6 +404,7 @@ export interface FileRouteTypes {
     | '/css-styling'
     | '/deferred-data'
     | '/entry-points'
+    | '/environment-variables'
     | '/error-handling'
     | '/execution-model'
     | '/forms'
@@ -430,6 +441,7 @@ export interface FileRouteTypes {
     | '/css-styling'
     | '/deferred-data'
     | '/entry-points'
+    | '/environment-variables'
     | '/error-handling'
     | '/execution-model'
     | '/forms'
@@ -470,6 +482,7 @@ export interface RootRouteChildren {
   CssStylingRoute: typeof CssStylingRoute
   DeferredDataRoute: typeof DeferredDataRoute
   EntryPointsRoute: typeof EntryPointsRoute
+  EnvironmentVariablesRoute: typeof EnvironmentVariablesRoute
   ErrorHandlingRoute: typeof ErrorHandlingRoute
   ExecutionModelRoute: typeof ExecutionModelRoute
   FormsRoute: typeof FormsRoute
@@ -528,6 +541,13 @@ declare module '@tanstack/react-router' {
       path: '/entry-points'
       fullPath: '/entry-points'
       preLoaderRoute: typeof EntryPointsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/environment-variables': {
+      id: '/environment-variables'
+      path: '/environment-variables'
+      fullPath: '/environment-variables'
+      preLoaderRoute: typeof EnvironmentVariablesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/error-handling': {
@@ -808,6 +828,7 @@ const rootRouteChildren: RootRouteChildren = {
   CssStylingRoute: CssStylingRoute,
   DeferredDataRoute: DeferredDataRoute,
   EntryPointsRoute: EntryPointsRoute,
+  EnvironmentVariablesRoute: EnvironmentVariablesRoute,
   ErrorHandlingRoute: ErrorHandlingRoute,
   ExecutionModelRoute: ExecutionModelRoute,
   FormsRoute: FormsRoute,
