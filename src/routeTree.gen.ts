@@ -26,6 +26,7 @@ import { Route as RequestResponseRouteImport } from './routes/request-response'
 import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
+import { Route as SelectiveSsrRouteRouteImport } from './routes/selective-ssr/route'
 import { Route as ServerFunctionsRouteImport } from './routes/server-functions'
 import { Route as ServerRoutesRouteImport } from './routes/server-routes'
 import { Route as StaticPrerenderingRouteImport } from './routes/static-prerendering'
@@ -41,6 +42,11 @@ import { Route as RouteContextIndexRouteImport } from './routes/route-context.in
 import { Route as RoutingIndexRouteImport } from './routes/routing.index'
 import { Route as RoutingPathlessRouteImport } from './routes/routing._pathless'
 import { Route as RoutingNestedRouteImport } from './routes/routing.nested'
+import { Route as SelectiveSsrIndexRouteImport } from './routes/selective-ssr/index'
+import { Route as SelectiveSsrDataOnlyRouteImport } from './routes/selective-ssr/data-only'
+import { Route as SelectiveSsrDynamicRouteImport } from './routes/selective-ssr/dynamic'
+import { Route as SelectiveSsrSsrFalseRouteImport } from './routes/selective-ssr/ssr-false'
+import { Route as SelectiveSsrSsrTrueRouteImport } from './routes/selective-ssr/ssr-true'
 import { Route as ServerComponentsIndexRouteImport } from './routes/server-components/index'
 import { Route as ServerComponentsCompositeRouteImport } from './routes/server-components/composite'
 import { Route as ServerComponentsWithQueryRouteImport } from './routes/server-components/with-query'
@@ -134,6 +140,11 @@ const SearchParamsRoute = SearchParamsRouteImport.update({
   path: '/search-params',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SelectiveSsrRouteRoute = SelectiveSsrRouteRouteImport.update({
+  id: '/selective-ssr',
+  path: '/selective-ssr',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServerFunctionsRoute = ServerFunctionsRouteImport.update({
   id: '/server-functions',
   path: '/server-functions',
@@ -208,6 +219,31 @@ const RoutingNestedRoute = RoutingNestedRouteImport.update({
   path: '/nested',
   getParentRoute: () => RoutingRoute,
 } as any)
+const SelectiveSsrIndexRoute = SelectiveSsrIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SelectiveSsrRouteRoute,
+} as any)
+const SelectiveSsrDataOnlyRoute = SelectiveSsrDataOnlyRouteImport.update({
+  id: '/data-only',
+  path: '/data-only',
+  getParentRoute: () => SelectiveSsrRouteRoute,
+} as any)
+const SelectiveSsrDynamicRoute = SelectiveSsrDynamicRouteImport.update({
+  id: '/dynamic',
+  path: '/dynamic',
+  getParentRoute: () => SelectiveSsrRouteRoute,
+} as any)
+const SelectiveSsrSsrFalseRoute = SelectiveSsrSsrFalseRouteImport.update({
+  id: '/ssr-false',
+  path: '/ssr-false',
+  getParentRoute: () => SelectiveSsrRouteRoute,
+} as any)
+const SelectiveSsrSsrTrueRoute = SelectiveSsrSsrTrueRouteImport.update({
+  id: '/ssr-true',
+  path: '/ssr-true',
+  getParentRoute: () => SelectiveSsrRouteRoute,
+} as any)
 const ServerComponentsIndexRoute = ServerComponentsIndexRouteImport.update({
   id: '/server-components/',
   path: '/server-components/',
@@ -249,6 +285,7 @@ const RoutingPathlessInsideRoute = RoutingPathlessInsideRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/selective-ssr': typeof SelectiveSsrRouteRouteWithChildren
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
@@ -276,11 +313,16 @@ export interface FileRoutesByFullPath {
   '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/nested': typeof RoutingNestedRoute
+  '/selective-ssr/data-only': typeof SelectiveSsrDataOnlyRoute
+  '/selective-ssr/dynamic': typeof SelectiveSsrDynamicRoute
+  '/selective-ssr/ssr-false': typeof SelectiveSsrSsrFalseRoute
+  '/selective-ssr/ssr-true': typeof SelectiveSsrSsrTrueRoute
   '/server-components/composite': typeof ServerComponentsCompositeRoute
   '/server-components/with-query': typeof ServerComponentsWithQueryRoute
   '/path-params/': typeof PathParamsIndexRoute
   '/route-context/': typeof RouteContextIndexRoute
   '/routing/': typeof RoutingIndexRoute
+  '/selective-ssr/': typeof SelectiveSsrIndexRoute
   '/server-components/': typeof ServerComponentsIndexRoute
   '/api/users/$id': typeof ApiUsersIdRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
@@ -315,10 +357,15 @@ export interface FileRoutesByTo {
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing': typeof RoutingIndexRoute
   '/routing/nested': typeof RoutingNestedRoute
+  '/selective-ssr/data-only': typeof SelectiveSsrDataOnlyRoute
+  '/selective-ssr/dynamic': typeof SelectiveSsrDynamicRoute
+  '/selective-ssr/ssr-false': typeof SelectiveSsrSsrFalseRoute
+  '/selective-ssr/ssr-true': typeof SelectiveSsrSsrTrueRoute
   '/server-components/composite': typeof ServerComponentsCompositeRoute
   '/server-components/with-query': typeof ServerComponentsWithQueryRoute
   '/path-params': typeof PathParamsIndexRoute
   '/route-context': typeof RouteContextIndexRoute
+  '/selective-ssr': typeof SelectiveSsrIndexRoute
   '/server-components': typeof ServerComponentsIndexRoute
   '/api/users/$id': typeof ApiUsersIdRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
@@ -328,6 +375,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/selective-ssr': typeof SelectiveSsrRouteRouteWithChildren
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
@@ -356,11 +404,16 @@ export interface FileRoutesById {
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/_pathless': typeof RoutingPathlessRouteWithChildren
   '/routing/nested': typeof RoutingNestedRoute
+  '/selective-ssr/data-only': typeof SelectiveSsrDataOnlyRoute
+  '/selective-ssr/dynamic': typeof SelectiveSsrDynamicRoute
+  '/selective-ssr/ssr-false': typeof SelectiveSsrSsrFalseRoute
+  '/selective-ssr/ssr-true': typeof SelectiveSsrSsrTrueRoute
   '/server-components/composite': typeof ServerComponentsCompositeRoute
   '/server-components/with-query': typeof ServerComponentsWithQueryRoute
   '/path-params/': typeof PathParamsIndexRoute
   '/route-context/': typeof RouteContextIndexRoute
   '/routing/': typeof RoutingIndexRoute
+  '/selective-ssr/': typeof SelectiveSsrIndexRoute
   '/server-components/': typeof ServerComponentsIndexRoute
   '/api/users/$id': typeof ApiUsersIdRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
@@ -371,6 +424,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/selective-ssr'
     | '/css-styling'
     | '/deferred-data'
     | '/entry-points'
@@ -398,11 +452,16 @@ export interface FileRouteTypes {
     | '/navigation/old-page'
     | '/path-params/$postId'
     | '/routing/nested'
+    | '/selective-ssr/data-only'
+    | '/selective-ssr/dynamic'
+    | '/selective-ssr/ssr-false'
+    | '/selective-ssr/ssr-true'
     | '/server-components/composite'
     | '/server-components/with-query'
     | '/path-params/'
     | '/route-context/'
     | '/routing/'
+    | '/selective-ssr/'
     | '/server-components/'
     | '/api/users/$id'
     | '/path-params/files/$'
@@ -437,10 +496,15 @@ export interface FileRouteTypes {
     | '/path-params/$postId'
     | '/routing'
     | '/routing/nested'
+    | '/selective-ssr/data-only'
+    | '/selective-ssr/dynamic'
+    | '/selective-ssr/ssr-false'
+    | '/selective-ssr/ssr-true'
     | '/server-components/composite'
     | '/server-components/with-query'
     | '/path-params'
     | '/route-context'
+    | '/selective-ssr'
     | '/server-components'
     | '/api/users/$id'
     | '/path-params/files/$'
@@ -449,6 +513,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/selective-ssr'
     | '/css-styling'
     | '/deferred-data'
     | '/entry-points'
@@ -477,11 +542,16 @@ export interface FileRouteTypes {
     | '/path-params/$postId'
     | '/routing/_pathless'
     | '/routing/nested'
+    | '/selective-ssr/data-only'
+    | '/selective-ssr/dynamic'
+    | '/selective-ssr/ssr-false'
+    | '/selective-ssr/ssr-true'
     | '/server-components/composite'
     | '/server-components/with-query'
     | '/path-params/'
     | '/route-context/'
     | '/routing/'
+    | '/selective-ssr/'
     | '/server-components/'
     | '/api/users/$id'
     | '/path-params/files/$'
@@ -491,6 +561,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SelectiveSsrRouteRoute: typeof SelectiveSsrRouteRouteWithChildren
   CssStylingRoute: typeof CssStylingRoute
   DeferredDataRoute: typeof DeferredDataRoute
   EntryPointsRoute: typeof EntryPointsRoute
@@ -647,6 +718,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchParamsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/selective-ssr': {
+      id: '/selective-ssr'
+      path: '/selective-ssr'
+      fullPath: '/selective-ssr'
+      preLoaderRoute: typeof SelectiveSsrRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/server-functions': {
       id: '/server-functions'
       path: '/server-functions'
@@ -752,6 +830,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoutingNestedRouteImport
       parentRoute: typeof RoutingRoute
     }
+    '/selective-ssr/': {
+      id: '/selective-ssr/'
+      path: '/'
+      fullPath: '/selective-ssr/'
+      preLoaderRoute: typeof SelectiveSsrIndexRouteImport
+      parentRoute: typeof SelectiveSsrRouteRoute
+    }
+    '/selective-ssr/data-only': {
+      id: '/selective-ssr/data-only'
+      path: '/data-only'
+      fullPath: '/selective-ssr/data-only'
+      preLoaderRoute: typeof SelectiveSsrDataOnlyRouteImport
+      parentRoute: typeof SelectiveSsrRouteRoute
+    }
+    '/selective-ssr/dynamic': {
+      id: '/selective-ssr/dynamic'
+      path: '/dynamic'
+      fullPath: '/selective-ssr/dynamic'
+      preLoaderRoute: typeof SelectiveSsrDynamicRouteImport
+      parentRoute: typeof SelectiveSsrRouteRoute
+    }
+    '/selective-ssr/ssr-false': {
+      id: '/selective-ssr/ssr-false'
+      path: '/ssr-false'
+      fullPath: '/selective-ssr/ssr-false'
+      preLoaderRoute: typeof SelectiveSsrSsrFalseRouteImport
+      parentRoute: typeof SelectiveSsrRouteRoute
+    }
+    '/selective-ssr/ssr-true': {
+      id: '/selective-ssr/ssr-true'
+      path: '/ssr-true'
+      fullPath: '/selective-ssr/ssr-true'
+      preLoaderRoute: typeof SelectiveSsrSsrTrueRouteImport
+      parentRoute: typeof SelectiveSsrRouteRoute
+    }
     '/server-components/': {
       id: '/server-components/'
       path: '/server-components'
@@ -804,6 +917,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface SelectiveSsrRouteRouteChildren {
+  SelectiveSsrDataOnlyRoute: typeof SelectiveSsrDataOnlyRoute
+  SelectiveSsrDynamicRoute: typeof SelectiveSsrDynamicRoute
+  SelectiveSsrSsrFalseRoute: typeof SelectiveSsrSsrFalseRoute
+  SelectiveSsrSsrTrueRoute: typeof SelectiveSsrSsrTrueRoute
+  SelectiveSsrIndexRoute: typeof SelectiveSsrIndexRoute
+}
+
+const SelectiveSsrRouteRouteChildren: SelectiveSsrRouteRouteChildren = {
+  SelectiveSsrDataOnlyRoute: SelectiveSsrDataOnlyRoute,
+  SelectiveSsrDynamicRoute: SelectiveSsrDynamicRoute,
+  SelectiveSsrSsrFalseRoute: SelectiveSsrSsrFalseRoute,
+  SelectiveSsrSsrTrueRoute: SelectiveSsrSsrTrueRoute,
+  SelectiveSsrIndexRoute: SelectiveSsrIndexRoute,
+}
+
+const SelectiveSsrRouteRouteWithChildren =
+  SelectiveSsrRouteRoute._addFileChildren(SelectiveSsrRouteRouteChildren)
+
 interface RouteContextRouteChildren {
   RouteContextIndexRoute: typeof RouteContextIndexRoute
 }
@@ -845,6 +977,7 @@ const RoutingRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SelectiveSsrRouteRoute: SelectiveSsrRouteRouteWithChildren,
   CssStylingRoute: CssStylingRoute,
   DeferredDataRoute: DeferredDataRoute,
   EntryPointsRoute: EntryPointsRoute,

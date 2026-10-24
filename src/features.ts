@@ -59,6 +59,7 @@ export const featureSections = [
   {
     title: '6. Rendering modes',
     items: [
+      { to: '/selective-ssr', title: 'Selective SSR', file: 'src/routes/selective-ssr/', description: "Per-route ssr: true | false | 'data-only'." },
       { to: '/static-prerendering', title: 'Static prerendering', file: 'src/routes/static-prerendering.tsx', description: 'Pages rendered to HTML at build time.' },
     ],
   },
