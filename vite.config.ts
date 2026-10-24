@@ -14,6 +14,7 @@
  */
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
+import rsc from '@vitejs/plugin-rsc'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -22,6 +23,10 @@ export default defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
     tanstackStart({
+      // React Server Components are opt-in (and experimental). Requires the
+      // rsc() plugin below. See /server-components.
+      rsc: { enabled: true },
+
       // Static prerendering at build time. See /static-prerendering.
       // We list pages explicitly instead of crawling every link because many
       // demos (auth, cookies, mutations…) only make sense with a live server.
@@ -35,6 +40,7 @@ export default defineConfig({
       // SPA mode (turns off SSR for every page). See /spa-mode.
       // spa: { enabled: true },
     }),
+    rsc(),
     viteReact(),
   ],
 })

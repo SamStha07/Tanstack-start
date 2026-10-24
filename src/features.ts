@@ -41,6 +41,14 @@ export const featureSections = [
     ],
   },
   {
+    title: '4. React Server Components',
+    items: [
+      { to: '/server-components', title: 'Server components', file: 'src/routes/server-components/index.tsx', description: 'renderServerComponent: render on the server, ship zero JS for it.' },
+      { to: '/server-components/composite', title: 'Composite components', file: 'src/routes/server-components/composite.tsx', description: 'createCompositeComponent: server markup with client "slots".' },
+      { to: '/server-components/with-query', title: 'RSC + TanStack Query', file: 'src/routes/server-components/with-query.tsx', description: 'Cache a server component in TanStack Query and refetch it.' },
+    ],
+  },
+  {
     title: '6. Rendering modes',
     items: [
       { to: '/static-prerendering', title: 'Static prerendering', file: 'src/routes/static-prerendering.tsx', description: 'Pages rendered to HTML at build time.' },
