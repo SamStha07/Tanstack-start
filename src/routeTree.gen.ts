@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CssStylingRouteImport } from './routes/css-styling'
+import { Route as DeferredDataRouteImport } from './routes/deferred-data'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
 import { Route as HeadSeoRouteImport } from './routes/head-seo'
 import { Route as LoadersRouteImport } from './routes/loaders'
@@ -37,6 +38,11 @@ const IndexRoute = IndexRouteImport.update({
 const CssStylingRoute = CssStylingRouteImport.update({
   id: '/css-styling',
   path: '/css-styling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeferredDataRoute = DeferredDataRouteImport.update({
+  id: '/deferred-data',
+  path: '/deferred-data',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EntryPointsRoute = EntryPointsRouteImport.update({
@@ -128,6 +134,7 @@ const RoutingPathlessInsideRoute = RoutingPathlessInsideRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/css-styling': typeof CssStylingRoute
+  '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
@@ -148,6 +155,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/css-styling': typeof CssStylingRoute
+  '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
@@ -167,6 +175,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/css-styling': typeof CssStylingRoute
+  '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/css-styling'
+    | '/deferred-data'
     | '/entry-points'
     | '/head-seo'
     | '/loaders'
@@ -210,6 +220,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/css-styling'
+    | '/deferred-data'
     | '/entry-points'
     | '/head-seo'
     | '/loaders'
@@ -228,6 +239,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/css-styling'
+    | '/deferred-data'
     | '/entry-points'
     | '/head-seo'
     | '/loaders'
@@ -250,6 +262,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CssStylingRoute: typeof CssStylingRoute
+  DeferredDataRoute: typeof DeferredDataRoute
   EntryPointsRoute: typeof EntryPointsRoute
   HeadSeoRoute: typeof HeadSeoRoute
   LoadersRoute: typeof LoadersRoute
@@ -278,6 +291,13 @@ declare module '@tanstack/react-router' {
       path: '/css-styling'
       fullPath: '/css-styling'
       preLoaderRoute: typeof CssStylingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deferred-data': {
+      id: '/deferred-data'
+      path: '/deferred-data'
+      fullPath: '/deferred-data'
+      preLoaderRoute: typeof DeferredDataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/entry-points': {
@@ -444,6 +464,7 @@ const RoutingRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CssStylingRoute: CssStylingRoute,
+  DeferredDataRoute: DeferredDataRoute,
   EntryPointsRoute: EntryPointsRoute,
   HeadSeoRoute: HeadSeoRoute,
   LoadersRoute: LoadersRoute,
