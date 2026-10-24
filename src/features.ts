@@ -29,6 +29,12 @@ export const featureSections = [
     ],
   },
   {
+    title: '3. Server',
+    items: [
+      { to: '/server-functions', title: 'Server functions', file: 'src/routes/server-functions.tsx', description: 'createServerFn: type-safe RPCs, GET vs POST, validation, useServerFn.' },
+    ],
+  },
+  {
     title: '7. Auth & app shell',
     items: [
       { to: '/entry-points', title: 'Entry points & config', file: 'src/routes/entry-points.tsx', description: 'vite.config.ts, router.tsx, start.ts, server.ts, client.tsx and __root.tsx.' },
