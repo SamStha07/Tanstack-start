@@ -11,10 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
+import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
 import { Route as PathParamsIndexRouteImport } from './routes/path-params/index'
 import { Route as PathParamsPostIdRouteImport } from './routes/path-params/$postId'
+import { Route as RouteContextIndexRouteImport } from './routes/route-context.index'
 import { Route as RoutingIndexRouteImport } from './routes/routing.index'
 import { Route as RoutingPathlessRouteImport } from './routes/routing._pathless'
 import { Route as RoutingNestedRouteImport } from './routes/routing.nested'
@@ -30,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
 const EntryPointsRoute = EntryPointsRouteImport.update({
   id: '/entry-points',
   path: '/entry-points',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RouteContextRoute = RouteContextRouteImport.update({
+  id: '/route-context',
+  path: '/route-context',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoutingRoute = RoutingRouteImport.update({
@@ -51,6 +58,11 @@ const PathParamsPostIdRoute = PathParamsPostIdRouteImport.update({
   id: '/path-params/$postId',
   path: '/path-params/$postId',
   getParentRoute: () => rootRouteImport,
+} as any)
+const RouteContextIndexRoute = RouteContextIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RouteContextRoute,
 } as any)
 const RoutingIndexRoute = RoutingIndexRouteImport.update({
   id: '/',
@@ -86,11 +98,13 @@ const RoutingPathlessInsideRoute = RoutingPathlessInsideRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/nested': typeof RoutingNestedRoute
   '/path-params/': typeof PathParamsIndexRoute
+  '/route-context/': typeof RouteContextIndexRoute
   '/routing/': typeof RoutingIndexRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
   '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
@@ -104,6 +118,7 @@ export interface FileRoutesByTo {
   '/routing': typeof RoutingIndexRoute
   '/routing/nested': typeof RoutingNestedRoute
   '/path-params': typeof PathParamsIndexRoute
+  '/route-context': typeof RouteContextIndexRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
   '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
   '/routing/inside': typeof RoutingPathlessInsideRoute
@@ -112,12 +127,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/_pathless': typeof RoutingPathlessRouteWithChildren
   '/routing/nested': typeof RoutingNestedRoute
   '/path-params/': typeof PathParamsIndexRoute
+  '/route-context/': typeof RouteContextIndexRoute
   '/routing/': typeof RoutingIndexRoute
   '/path-params/files/$': typeof PathParamsFilesSplatRoute
   '/path-params/{-$lang}/about': typeof PathParamsChar123LangChar125AboutRoute
@@ -128,11 +145,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/entry-points'
+    | '/route-context'
     | '/routing'
     | '/search-params'
     | '/path-params/$postId'
     | '/routing/nested'
     | '/path-params/'
+    | '/route-context/'
     | '/routing/'
     | '/path-params/files/$'
     | '/path-params/{-$lang}/about'
@@ -146,6 +165,7 @@ export interface FileRouteTypes {
     | '/routing'
     | '/routing/nested'
     | '/path-params'
+    | '/route-context'
     | '/path-params/files/$'
     | '/path-params/{-$lang}/about'
     | '/routing/inside'
@@ -153,12 +173,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/entry-points'
+    | '/route-context'
     | '/routing'
     | '/search-params'
     | '/path-params/$postId'
     | '/routing/_pathless'
     | '/routing/nested'
     | '/path-params/'
+    | '/route-context/'
     | '/routing/'
     | '/path-params/files/$'
     | '/path-params/{-$lang}/about'
@@ -168,6 +190,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EntryPointsRoute: typeof EntryPointsRoute
+  RouteContextRoute: typeof RouteContextRouteWithChildren
   RoutingRoute: typeof RoutingRouteWithChildren
   SearchParamsRoute: typeof SearchParamsRoute
   PathParamsPostIdRoute: typeof PathParamsPostIdRoute
@@ -190,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/entry-points'
       fullPath: '/entry-points'
       preLoaderRoute: typeof EntryPointsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/route-context': {
+      id: '/route-context'
+      path: '/route-context'
+      fullPath: '/route-context'
+      preLoaderRoute: typeof RouteContextRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/routing': {
@@ -219,6 +249,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/path-params/$postId'
       preLoaderRoute: typeof PathParamsPostIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/route-context/': {
+      id: '/route-context/'
+      path: '/'
+      fullPath: '/route-context/'
+      preLoaderRoute: typeof RouteContextIndexRouteImport
+      parentRoute: typeof RouteContextRoute
     }
     '/routing/': {
       id: '/routing/'
@@ -265,6 +302,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface RouteContextRouteChildren {
+  RouteContextIndexRoute: typeof RouteContextIndexRoute
+}
+
+const RouteContextRouteChildren: RouteContextRouteChildren = {
+  RouteContextIndexRoute: RouteContextIndexRoute,
+}
+
+const RouteContextRouteWithChildren = RouteContextRoute._addFileChildren(
+  RouteContextRouteChildren,
+)
+
 interface RoutingPathlessRouteChildren {
   RoutingPathlessInsideRoute: typeof RoutingPathlessInsideRoute
 }
@@ -295,6 +344,7 @@ const RoutingRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EntryPointsRoute: EntryPointsRoute,
+  RouteContextRoute: RouteContextRouteWithChildren,
   RoutingRoute: RoutingRouteWithChildren,
   SearchParamsRoute: SearchParamsRoute,
   PathParamsPostIdRoute: PathParamsPostIdRoute,
