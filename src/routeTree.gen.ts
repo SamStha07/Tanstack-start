@@ -19,6 +19,7 @@ import { Route as NavigationRouteImport } from './routes/navigation'
 import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
+import { Route as TanstackQueryRouteImport } from './routes/tanstack-query'
 import { Route as NavigationOldPageRouteImport } from './routes/navigation_.old-page'
 import { Route as PathParamsIndexRouteImport } from './routes/path-params/index'
 import { Route as PathParamsPostIdRouteImport } from './routes/path-params/$postId'
@@ -78,6 +79,11 @@ const RoutingRoute = RoutingRouteImport.update({
 const SearchParamsRoute = SearchParamsRouteImport.update({
   id: '/search-params',
   path: '/search-params',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TanstackQueryRoute = TanstackQueryRouteImport.update({
+  id: '/tanstack-query',
+  path: '/tanstack-query',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NavigationOldPageRoute = NavigationOldPageRouteImport.update({
@@ -142,6 +148,7 @@ export interface FileRoutesByFullPath {
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
+  '/tanstack-query': typeof TanstackQueryRoute
   '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/nested': typeof RoutingNestedRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/loaders': typeof LoadersRoute
   '/navigation': typeof NavigationRoute
   '/search-params': typeof SearchParamsRoute
+  '/tanstack-query': typeof TanstackQueryRoute
   '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing': typeof RoutingIndexRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
+  '/tanstack-query': typeof TanstackQueryRoute
   '/navigation_/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/_pathless': typeof RoutingPathlessRouteWithChildren
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/route-context'
     | '/routing'
     | '/search-params'
+    | '/tanstack-query'
     | '/navigation/old-page'
     | '/path-params/$postId'
     | '/routing/nested'
@@ -226,6 +236,7 @@ export interface FileRouteTypes {
     | '/loaders'
     | '/navigation'
     | '/search-params'
+    | '/tanstack-query'
     | '/navigation/old-page'
     | '/path-params/$postId'
     | '/routing'
@@ -247,6 +258,7 @@ export interface FileRouteTypes {
     | '/route-context'
     | '/routing'
     | '/search-params'
+    | '/tanstack-query'
     | '/navigation_/old-page'
     | '/path-params/$postId'
     | '/routing/_pathless'
@@ -270,6 +282,7 @@ export interface RootRouteChildren {
   RouteContextRoute: typeof RouteContextRouteWithChildren
   RoutingRoute: typeof RoutingRouteWithChildren
   SearchParamsRoute: typeof SearchParamsRoute
+  TanstackQueryRoute: typeof TanstackQueryRoute
   NavigationOldPageRoute: typeof NavigationOldPageRoute
   PathParamsPostIdRoute: typeof PathParamsPostIdRoute
   PathParamsIndexRoute: typeof PathParamsIndexRoute
@@ -347,6 +360,13 @@ declare module '@tanstack/react-router' {
       path: '/search-params'
       fullPath: '/search-params'
       preLoaderRoute: typeof SearchParamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tanstack-query': {
+      id: '/tanstack-query'
+      path: '/tanstack-query'
+      fullPath: '/tanstack-query'
+      preLoaderRoute: typeof TanstackQueryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/navigation_/old-page': {
@@ -472,6 +492,7 @@ const rootRouteChildren: RootRouteChildren = {
   RouteContextRoute: RouteContextRouteWithChildren,
   RoutingRoute: RoutingRouteWithChildren,
   SearchParamsRoute: SearchParamsRoute,
+  TanstackQueryRoute: TanstackQueryRoute,
   NavigationOldPageRoute: NavigationOldPageRoute,
   PathParamsPostIdRoute: PathParamsPostIdRoute,
   PathParamsIndexRoute: PathParamsIndexRoute,

@@ -24,6 +24,7 @@ export const featureSections = [
     items: [
       { to: '/loaders', title: 'Route loaders', file: 'src/routes/loaders.tsx', description: 'loader, loaderDeps, staleTime, pending UI and caching.' },
       { to: '/deferred-data', title: 'Deferred / streamed data', file: 'src/routes/deferred-data.tsx', description: 'Return un-awaited promises from a loader and stream them in with <Await> / use().' },
+      { to: '/tanstack-query', title: 'TanStack Query', file: 'src/routes/tanstack-query.tsx', description: 'SSR + hydration of a query cache, useSuspenseQuery and mutations with invalidation.' },
     ],
   },
   {
