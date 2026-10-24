@@ -8,6 +8,12 @@
  */
 export const featureSections = [
   {
+    title: '1. Routing basics',
+    items: [
+      { to: '/routing', title: 'File-based routing', file: 'src/routes/routing.tsx', description: 'How files in src/routes become URLs, layouts and nested routes with <Outlet />.' },
+    ],
+  },
+  {
     title: '7. Auth & app shell',
     items: [
       { to: '/entry-points', title: 'Entry points & config', file: 'src/routes/entry-points.tsx', description: 'vite.config.ts, router.tsx, start.ts, server.ts, client.tsx and __root.tsx.' },

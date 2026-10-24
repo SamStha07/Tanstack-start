@@ -11,6 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
+import { Route as RoutingRouteImport } from './routes/routing'
+import { Route as RoutingIndexRouteImport } from './routes/routing.index'
+import { Route as RoutingPathlessRouteImport } from './routes/routing._pathless'
+import { Route as RoutingNestedRouteImport } from './routes/routing.nested'
+import { Route as RoutingPathlessInsideRouteImport } from './routes/routing._pathless.inside'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +27,82 @@ const EntryPointsRoute = EntryPointsRouteImport.update({
   path: '/entry-points',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoutingRoute = RoutingRouteImport.update({
+  id: '/routing',
+  path: '/routing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoutingIndexRoute = RoutingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RoutingRoute,
+} as any)
+const RoutingPathlessRoute = RoutingPathlessRouteImport.update({
+  id: '/_pathless',
+  getParentRoute: () => RoutingRoute,
+} as any)
+const RoutingNestedRoute = RoutingNestedRouteImport.update({
+  id: '/nested',
+  path: '/nested',
+  getParentRoute: () => RoutingRoute,
+} as any)
+const RoutingPathlessInsideRoute = RoutingPathlessInsideRouteImport.update({
+  id: '/inside',
+  path: '/inside',
+  getParentRoute: () => RoutingPathlessRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/routing': typeof RoutingRouteWithChildren
+  '/routing/nested': typeof RoutingNestedRoute
+  '/routing/': typeof RoutingIndexRoute
+  '/routing/inside': typeof RoutingPathlessInsideRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/routing': typeof RoutingIndexRoute
+  '/routing/nested': typeof RoutingNestedRoute
+  '/routing/inside': typeof RoutingPathlessInsideRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/routing': typeof RoutingRouteWithChildren
+  '/routing/_pathless': typeof RoutingPathlessRouteWithChildren
+  '/routing/nested': typeof RoutingNestedRoute
+  '/routing/': typeof RoutingIndexRoute
+  '/routing/_pathless/inside': typeof RoutingPathlessInsideRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/entry-points'
+  fullPaths:
+    | '/'
+    | '/entry-points'
+    | '/routing'
+    | '/routing/nested'
+    | '/routing/'
+    | '/routing/inside'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/entry-points'
-  id: '__root__' | '/' | '/entry-points'
+  to: '/' | '/entry-points' | '/routing' | '/routing/nested' | '/routing/inside'
+  id:
+    | '__root__'
+    | '/'
+    | '/entry-points'
+    | '/routing'
+    | '/routing/_pathless'
+    | '/routing/nested'
+    | '/routing/'
+    | '/routing/_pathless/inside'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EntryPointsRoute: typeof EntryPointsRoute
+  RoutingRoute: typeof RoutingRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +121,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EntryPointsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/routing': {
+      id: '/routing'
+      path: '/routing'
+      fullPath: '/routing'
+      preLoaderRoute: typeof RoutingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/routing/': {
+      id: '/routing/'
+      path: '/'
+      fullPath: '/routing/'
+      preLoaderRoute: typeof RoutingIndexRouteImport
+      parentRoute: typeof RoutingRoute
+    }
+    '/routing/_pathless': {
+      id: '/routing/_pathless'
+      path: ''
+      fullPath: '/routing'
+      preLoaderRoute: typeof RoutingPathlessRouteImport
+      parentRoute: typeof RoutingRoute
+    }
+    '/routing/nested': {
+      id: '/routing/nested'
+      path: '/nested'
+      fullPath: '/routing/nested'
+      preLoaderRoute: typeof RoutingNestedRouteImport
+      parentRoute: typeof RoutingRoute
+    }
+    '/routing/_pathless/inside': {
+      id: '/routing/_pathless/inside'
+      path: '/inside'
+      fullPath: '/routing/inside'
+      preLoaderRoute: typeof RoutingPathlessInsideRouteImport
+      parentRoute: typeof RoutingPathlessRoute
+    }
   }
 }
+
+interface RoutingPathlessRouteChildren {
+  RoutingPathlessInsideRoute: typeof RoutingPathlessInsideRoute
+}
+
+const RoutingPathlessRouteChildren: RoutingPathlessRouteChildren = {
+  RoutingPathlessInsideRoute: RoutingPathlessInsideRoute,
+}
+
+const RoutingPathlessRouteWithChildren = RoutingPathlessRoute._addFileChildren(
+  RoutingPathlessRouteChildren,
+)
+
+interface RoutingRouteChildren {
+  RoutingPathlessRoute: typeof RoutingPathlessRouteWithChildren
+  RoutingNestedRoute: typeof RoutingNestedRoute
+  RoutingIndexRoute: typeof RoutingIndexRoute
+}
+
+const RoutingRouteChildren: RoutingRouteChildren = {
+  RoutingPathlessRoute: RoutingPathlessRouteWithChildren,
+  RoutingNestedRoute: RoutingNestedRoute,
+  RoutingIndexRoute: RoutingIndexRoute,
+}
+
+const RoutingRouteWithChildren =
+  RoutingRoute._addFileChildren(RoutingRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EntryPointsRoute: EntryPointsRoute,
+  RoutingRoute: RoutingRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
