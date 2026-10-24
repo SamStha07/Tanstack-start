@@ -33,6 +33,7 @@ export const featureSections = [
     items: [
       { to: '/server-functions', title: 'Server functions', file: 'src/routes/server-functions.tsx', description: 'createServerFn: type-safe RPCs, GET vs POST, validation, useServerFn.' },
       { to: '/forms', title: 'Forms & FormData', file: 'src/routes/forms.tsx', description: 'Posting native <form> FormData to a server function.' },
+      { to: '/streaming', title: 'Streaming server functions', file: 'src/routes/streaming.tsx', description: 'Stream typed chunks with async generators and ReadableStream.' },
     ],
   },
   {

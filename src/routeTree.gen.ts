@@ -22,6 +22,7 @@ import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
 import { Route as ServerFunctionsRouteImport } from './routes/server-functions'
+import { Route as StreamingRouteImport } from './routes/streaming'
 import { Route as TanstackQueryRouteImport } from './routes/tanstack-query'
 import { Route as NavigationOldPageRouteImport } from './routes/navigation_.old-page'
 import { Route as PathParamsIndexRouteImport } from './routes/path-params/index'
@@ -99,6 +100,11 @@ const ServerFunctionsRoute = ServerFunctionsRouteImport.update({
   path: '/server-functions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StreamingRoute = StreamingRouteImport.update({
+  id: '/streaming',
+  path: '/streaming',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TanstackQueryRoute = TanstackQueryRouteImport.update({
   id: '/tanstack-query',
   path: '/tanstack-query',
@@ -169,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
+  '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
   '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByTo {
   '/navigation': typeof NavigationRoute
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
+  '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
   '/navigation/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
@@ -218,6 +226,7 @@ export interface FileRoutesById {
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
+  '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
   '/navigation_/old-page': typeof NavigationOldPageRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
@@ -246,6 +255,7 @@ export interface FileRouteTypes {
     | '/routing'
     | '/search-params'
     | '/server-functions'
+    | '/streaming'
     | '/tanstack-query'
     | '/navigation/old-page'
     | '/path-params/$postId'
@@ -269,6 +279,7 @@ export interface FileRouteTypes {
     | '/navigation'
     | '/search-params'
     | '/server-functions'
+    | '/streaming'
     | '/tanstack-query'
     | '/navigation/old-page'
     | '/path-params/$postId'
@@ -294,6 +305,7 @@ export interface FileRouteTypes {
     | '/routing'
     | '/search-params'
     | '/server-functions'
+    | '/streaming'
     | '/tanstack-query'
     | '/navigation_/old-page'
     | '/path-params/$postId'
@@ -321,6 +333,7 @@ export interface RootRouteChildren {
   RoutingRoute: typeof RoutingRouteWithChildren
   SearchParamsRoute: typeof SearchParamsRoute
   ServerFunctionsRoute: typeof ServerFunctionsRoute
+  StreamingRoute: typeof StreamingRoute
   TanstackQueryRoute: typeof TanstackQueryRoute
   NavigationOldPageRoute: typeof NavigationOldPageRoute
   PathParamsPostIdRoute: typeof PathParamsPostIdRoute
@@ -420,6 +433,13 @@ declare module '@tanstack/react-router' {
       path: '/server-functions'
       fullPath: '/server-functions'
       preLoaderRoute: typeof ServerFunctionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/streaming': {
+      id: '/streaming'
+      path: '/streaming'
+      fullPath: '/streaming'
+      preLoaderRoute: typeof StreamingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tanstack-query': {
@@ -555,6 +575,7 @@ const rootRouteChildren: RootRouteChildren = {
   RoutingRoute: RoutingRouteWithChildren,
   SearchParamsRoute: SearchParamsRoute,
   ServerFunctionsRoute: ServerFunctionsRoute,
+  StreamingRoute: StreamingRoute,
   TanstackQueryRoute: TanstackQueryRoute,
   NavigationOldPageRoute: NavigationOldPageRoute,
   PathParamsPostIdRoute: PathParamsPostIdRoute,
