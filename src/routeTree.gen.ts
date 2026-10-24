@@ -17,6 +17,7 @@ import { Route as ErrorHandlingRouteImport } from './routes/error-handling'
 import { Route as FormsRouteImport } from './routes/forms'
 import { Route as HeadSeoRouteImport } from './routes/head-seo'
 import { Route as LoadersRouteImport } from './routes/loaders'
+import { Route as MiddlewareRouteImport } from './routes/middleware'
 import { Route as NavigationRouteImport } from './routes/navigation'
 import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
@@ -73,6 +74,11 @@ const HeadSeoRoute = HeadSeoRouteImport.update({
 const LoadersRoute = LoadersRouteImport.update({
   id: '/loaders',
   path: '/loaders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MiddlewareRoute = MiddlewareRouteImport.update({
+  id: '/middleware',
+  path: '/middleware',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NavigationRoute = NavigationRouteImport.update({
@@ -170,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/forms': typeof FormsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
+  '/middleware': typeof MiddlewareRoute
   '/navigation': typeof NavigationRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
@@ -196,6 +203,7 @@ export interface FileRoutesByTo {
   '/forms': typeof FormsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
+  '/middleware': typeof MiddlewareRoute
   '/navigation': typeof NavigationRoute
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
@@ -221,6 +229,7 @@ export interface FileRoutesById {
   '/forms': typeof FormsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
+  '/middleware': typeof MiddlewareRoute
   '/navigation': typeof NavigationRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
@@ -250,6 +259,7 @@ export interface FileRouteTypes {
     | '/forms'
     | '/head-seo'
     | '/loaders'
+    | '/middleware'
     | '/navigation'
     | '/route-context'
     | '/routing'
@@ -276,6 +286,7 @@ export interface FileRouteTypes {
     | '/forms'
     | '/head-seo'
     | '/loaders'
+    | '/middleware'
     | '/navigation'
     | '/search-params'
     | '/server-functions'
@@ -300,6 +311,7 @@ export interface FileRouteTypes {
     | '/forms'
     | '/head-seo'
     | '/loaders'
+    | '/middleware'
     | '/navigation'
     | '/route-context'
     | '/routing'
@@ -328,6 +340,7 @@ export interface RootRouteChildren {
   FormsRoute: typeof FormsRoute
   HeadSeoRoute: typeof HeadSeoRoute
   LoadersRoute: typeof LoadersRoute
+  MiddlewareRoute: typeof MiddlewareRoute
   NavigationRoute: typeof NavigationRoute
   RouteContextRoute: typeof RouteContextRouteWithChildren
   RoutingRoute: typeof RoutingRouteWithChildren
@@ -398,6 +411,13 @@ declare module '@tanstack/react-router' {
       path: '/loaders'
       fullPath: '/loaders'
       preLoaderRoute: typeof LoadersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/middleware': {
+      id: '/middleware'
+      path: '/middleware'
+      fullPath: '/middleware'
+      preLoaderRoute: typeof MiddlewareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/navigation': {
@@ -570,6 +590,7 @@ const rootRouteChildren: RootRouteChildren = {
   FormsRoute: FormsRoute,
   HeadSeoRoute: HeadSeoRoute,
   LoadersRoute: LoadersRoute,
+  MiddlewareRoute: MiddlewareRoute,
   NavigationRoute: NavigationRoute,
   RouteContextRoute: RouteContextRouteWithChildren,
   RoutingRoute: RoutingRouteWithChildren,

@@ -34,6 +34,7 @@ export const featureSections = [
       { to: '/server-functions', title: 'Server functions', file: 'src/routes/server-functions.tsx', description: 'createServerFn: type-safe RPCs, GET vs POST, validation, useServerFn.' },
       { to: '/forms', title: 'Forms & FormData', file: 'src/routes/forms.tsx', description: 'Posting native <form> FormData to a server function.' },
       { to: '/streaming', title: 'Streaming server functions', file: 'src/routes/streaming.tsx', description: 'Stream typed chunks with async generators and ReadableStream.' },
+      { to: '/middleware', title: 'Middleware', file: 'src/routes/middleware.tsx', description: 'Request vs function middleware, context, sendContext and global middleware.' },
     ],
   },
   {
