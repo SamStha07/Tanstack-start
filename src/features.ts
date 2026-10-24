@@ -35,6 +35,7 @@ export const featureSections = [
       { to: '/forms', title: 'Forms & FormData', file: 'src/routes/forms.tsx', description: 'Posting native <form> FormData to a server function.' },
       { to: '/streaming', title: 'Streaming server functions', file: 'src/routes/streaming.tsx', description: 'Stream typed chunks with async generators and ReadableStream.' },
       { to: '/middleware', title: 'Middleware', file: 'src/routes/middleware.tsx', description: 'Request vs function middleware, context, sendContext and global middleware.' },
+      { to: '/request-response', title: 'Request & response utils', file: 'src/routes/request-response.tsx', description: 'Read headers / cookies, set status, headers and cookies from the server.' },
     ],
   },
   {

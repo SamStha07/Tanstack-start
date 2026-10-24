@@ -19,6 +19,7 @@ import { Route as HeadSeoRouteImport } from './routes/head-seo'
 import { Route as LoadersRouteImport } from './routes/loaders'
 import { Route as MiddlewareRouteImport } from './routes/middleware'
 import { Route as NavigationRouteImport } from './routes/navigation'
+import { Route as RequestResponseRouteImport } from './routes/request-response'
 import { Route as RouteContextRouteImport } from './routes/route-context'
 import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
@@ -84,6 +85,11 @@ const MiddlewareRoute = MiddlewareRouteImport.update({
 const NavigationRoute = NavigationRouteImport.update({
   id: '/navigation',
   path: '/navigation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestResponseRoute = RequestResponseRouteImport.update({
+  id: '/request-response',
+  path: '/request-response',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RouteContextRoute = RouteContextRouteImport.update({
@@ -178,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/loaders': typeof LoadersRoute
   '/middleware': typeof MiddlewareRoute
   '/navigation': typeof NavigationRoute
+  '/request-response': typeof RequestResponseRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
@@ -205,6 +212,7 @@ export interface FileRoutesByTo {
   '/loaders': typeof LoadersRoute
   '/middleware': typeof MiddlewareRoute
   '/navigation': typeof NavigationRoute
+  '/request-response': typeof RequestResponseRoute
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
   '/streaming': typeof StreamingRoute
@@ -231,6 +239,7 @@ export interface FileRoutesById {
   '/loaders': typeof LoadersRoute
   '/middleware': typeof MiddlewareRoute
   '/navigation': typeof NavigationRoute
+  '/request-response': typeof RequestResponseRoute
   '/route-context': typeof RouteContextRouteWithChildren
   '/routing': typeof RoutingRouteWithChildren
   '/search-params': typeof SearchParamsRoute
@@ -261,6 +270,7 @@ export interface FileRouteTypes {
     | '/loaders'
     | '/middleware'
     | '/navigation'
+    | '/request-response'
     | '/route-context'
     | '/routing'
     | '/search-params'
@@ -288,6 +298,7 @@ export interface FileRouteTypes {
     | '/loaders'
     | '/middleware'
     | '/navigation'
+    | '/request-response'
     | '/search-params'
     | '/server-functions'
     | '/streaming'
@@ -313,6 +324,7 @@ export interface FileRouteTypes {
     | '/loaders'
     | '/middleware'
     | '/navigation'
+    | '/request-response'
     | '/route-context'
     | '/routing'
     | '/search-params'
@@ -342,6 +354,7 @@ export interface RootRouteChildren {
   LoadersRoute: typeof LoadersRoute
   MiddlewareRoute: typeof MiddlewareRoute
   NavigationRoute: typeof NavigationRoute
+  RequestResponseRoute: typeof RequestResponseRoute
   RouteContextRoute: typeof RouteContextRouteWithChildren
   RoutingRoute: typeof RoutingRouteWithChildren
   SearchParamsRoute: typeof SearchParamsRoute
@@ -425,6 +438,13 @@ declare module '@tanstack/react-router' {
       path: '/navigation'
       fullPath: '/navigation'
       preLoaderRoute: typeof NavigationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/request-response': {
+      id: '/request-response'
+      path: '/request-response'
+      fullPath: '/request-response'
+      preLoaderRoute: typeof RequestResponseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/route-context': {
@@ -592,6 +612,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoadersRoute: LoadersRoute,
   MiddlewareRoute: MiddlewareRoute,
   NavigationRoute: NavigationRoute,
+  RequestResponseRoute: RequestResponseRoute,
   RouteContextRoute: RouteContextRouteWithChildren,
   RoutingRoute: RoutingRouteWithChildren,
   SearchParamsRoute: SearchParamsRoute,
