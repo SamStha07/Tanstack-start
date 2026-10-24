@@ -40,6 +40,12 @@ export const featureSections = [
     ],
   },
   {
+    title: '6. Rendering modes',
+    items: [
+      { to: '/static-prerendering', title: 'Static prerendering', file: 'src/routes/static-prerendering.tsx', description: 'Pages rendered to HTML at build time.' },
+    ],
+  },
+  {
     title: '7. Auth & app shell',
     items: [
       { to: '/entry-points', title: 'Entry points & config', file: 'src/routes/entry-points.tsx', description: 'vite.config.ts, router.tsx, start.ts, server.ts, client.tsx and __root.tsx.' },

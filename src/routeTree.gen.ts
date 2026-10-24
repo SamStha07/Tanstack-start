@@ -25,6 +25,7 @@ import { Route as RoutingRouteImport } from './routes/routing'
 import { Route as SearchParamsRouteImport } from './routes/search-params'
 import { Route as ServerFunctionsRouteImport } from './routes/server-functions'
 import { Route as ServerRoutesRouteImport } from './routes/server-routes'
+import { Route as StaticPrerenderingRouteImport } from './routes/static-prerendering'
 import { Route as StreamingRouteImport } from './routes/streaming'
 import { Route as TanstackQueryRouteImport } from './routes/tanstack-query'
 import { Route as ApiHelloRouteImport } from './routes/api/hello'
@@ -120,6 +121,11 @@ const ServerRoutesRoute = ServerRoutesRouteImport.update({
   path: '/server-routes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaticPrerenderingRoute = StaticPrerenderingRouteImport.update({
+  id: '/static-prerendering',
+  path: '/static-prerendering',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StreamingRoute = StreamingRouteImport.update({
   id: '/streaming',
   path: '/streaming',
@@ -208,6 +214,7 @@ export interface FileRoutesByFullPath {
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
   '/server-routes': typeof ServerRoutesRoute
+  '/static-prerendering': typeof StaticPrerenderingRoute
   '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
   '/api/hello': typeof ApiHelloRoute
@@ -237,6 +244,7 @@ export interface FileRoutesByTo {
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
   '/server-routes': typeof ServerRoutesRoute
+  '/static-prerendering': typeof StaticPrerenderingRoute
   '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
   '/api/hello': typeof ApiHelloRoute
@@ -269,6 +277,7 @@ export interface FileRoutesById {
   '/search-params': typeof SearchParamsRoute
   '/server-functions': typeof ServerFunctionsRoute
   '/server-routes': typeof ServerRoutesRoute
+  '/static-prerendering': typeof StaticPrerenderingRoute
   '/streaming': typeof StreamingRoute
   '/tanstack-query': typeof TanstackQueryRoute
   '/api/hello': typeof ApiHelloRoute
@@ -303,6 +312,7 @@ export interface FileRouteTypes {
     | '/search-params'
     | '/server-functions'
     | '/server-routes'
+    | '/static-prerendering'
     | '/streaming'
     | '/tanstack-query'
     | '/api/hello'
@@ -332,6 +342,7 @@ export interface FileRouteTypes {
     | '/search-params'
     | '/server-functions'
     | '/server-routes'
+    | '/static-prerendering'
     | '/streaming'
     | '/tanstack-query'
     | '/api/hello'
@@ -363,6 +374,7 @@ export interface FileRouteTypes {
     | '/search-params'
     | '/server-functions'
     | '/server-routes'
+    | '/static-prerendering'
     | '/streaming'
     | '/tanstack-query'
     | '/api/hello'
@@ -396,6 +408,7 @@ export interface RootRouteChildren {
   SearchParamsRoute: typeof SearchParamsRoute
   ServerFunctionsRoute: typeof ServerFunctionsRoute
   ServerRoutesRoute: typeof ServerRoutesRoute
+  StaticPrerenderingRoute: typeof StaticPrerenderingRoute
   StreamingRoute: typeof StreamingRoute
   TanstackQueryRoute: typeof TanstackQueryRoute
   ApiHelloRoute: typeof ApiHelloRoute
@@ -519,6 +532,13 @@ declare module '@tanstack/react-router' {
       path: '/server-routes'
       fullPath: '/server-routes'
       preLoaderRoute: typeof ServerRoutesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/static-prerendering': {
+      id: '/static-prerendering'
+      path: '/static-prerendering'
+      fullPath: '/static-prerendering'
+      preLoaderRoute: typeof StaticPrerenderingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/streaming': {
@@ -678,6 +698,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchParamsRoute: SearchParamsRoute,
   ServerFunctionsRoute: ServerFunctionsRoute,
   ServerRoutesRoute: ServerRoutesRoute,
+  StaticPrerenderingRoute: StaticPrerenderingRoute,
   StreamingRoute: StreamingRoute,
   TanstackQueryRoute: TanstackQueryRoute,
   ApiHelloRoute: ApiHelloRoute,

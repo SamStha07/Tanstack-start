@@ -22,6 +22,16 @@ export default defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
     tanstackStart({
+      // Static prerendering at build time. See /static-prerendering.
+      // We list pages explicitly instead of crawling every link because many
+      // demos (auth, cookies, mutations…) only make sense with a live server.
+      prerender: {
+        enabled: true,
+        crawlLinks: false,
+        autoStaticPathsDiscovery: false,
+      },
+      pages: [{ path: '/static-prerendering' }],
+
       // SPA mode (turns off SSR for every page). See /spa-mode.
       // spa: { enabled: true },
     }),
