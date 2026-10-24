@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CssStylingRouteImport } from './routes/css-styling'
 import { Route as DeferredDataRouteImport } from './routes/deferred-data'
+import { Route as DeferredHydrationRouteImport } from './routes/deferred-hydration'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
 import { Route as EnvironmentVariablesRouteImport } from './routes/environment-variables'
 import { Route as ErrorHandlingRouteImport } from './routes/error-handling'
@@ -68,6 +69,11 @@ const CssStylingRoute = CssStylingRouteImport.update({
 const DeferredDataRoute = DeferredDataRouteImport.update({
   id: '/deferred-data',
   path: '/deferred-data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeferredHydrationRoute = DeferredHydrationRouteImport.update({
+  id: '/deferred-hydration',
+  path: '/deferred-hydration',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EntryPointsRoute = EntryPointsRouteImport.update({
@@ -288,6 +294,7 @@ export interface FileRoutesByFullPath {
   '/selective-ssr': typeof SelectiveSsrRouteRouteWithChildren
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
+  '/deferred-hydration': typeof DeferredHydrationRoute
   '/entry-points': typeof EntryPointsRoute
   '/environment-variables': typeof EnvironmentVariablesRoute
   '/error-handling': typeof ErrorHandlingRoute
@@ -333,6 +340,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
+  '/deferred-hydration': typeof DeferredHydrationRoute
   '/entry-points': typeof EntryPointsRoute
   '/environment-variables': typeof EnvironmentVariablesRoute
   '/error-handling': typeof ErrorHandlingRoute
@@ -378,6 +386,7 @@ export interface FileRoutesById {
   '/selective-ssr': typeof SelectiveSsrRouteRouteWithChildren
   '/css-styling': typeof CssStylingRoute
   '/deferred-data': typeof DeferredDataRoute
+  '/deferred-hydration': typeof DeferredHydrationRoute
   '/entry-points': typeof EntryPointsRoute
   '/environment-variables': typeof EnvironmentVariablesRoute
   '/error-handling': typeof ErrorHandlingRoute
@@ -427,6 +436,7 @@ export interface FileRouteTypes {
     | '/selective-ssr'
     | '/css-styling'
     | '/deferred-data'
+    | '/deferred-hydration'
     | '/entry-points'
     | '/environment-variables'
     | '/error-handling'
@@ -472,6 +482,7 @@ export interface FileRouteTypes {
     | '/'
     | '/css-styling'
     | '/deferred-data'
+    | '/deferred-hydration'
     | '/entry-points'
     | '/environment-variables'
     | '/error-handling'
@@ -516,6 +527,7 @@ export interface FileRouteTypes {
     | '/selective-ssr'
     | '/css-styling'
     | '/deferred-data'
+    | '/deferred-hydration'
     | '/entry-points'
     | '/environment-variables'
     | '/error-handling'
@@ -564,6 +576,7 @@ export interface RootRouteChildren {
   SelectiveSsrRouteRoute: typeof SelectiveSsrRouteRouteWithChildren
   CssStylingRoute: typeof CssStylingRoute
   DeferredDataRoute: typeof DeferredDataRoute
+  DeferredHydrationRoute: typeof DeferredHydrationRoute
   EntryPointsRoute: typeof EntryPointsRoute
   EnvironmentVariablesRoute: typeof EnvironmentVariablesRoute
   ErrorHandlingRoute: typeof ErrorHandlingRoute
@@ -618,6 +631,13 @@ declare module '@tanstack/react-router' {
       path: '/deferred-data'
       fullPath: '/deferred-data'
       preLoaderRoute: typeof DeferredDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deferred-hydration': {
+      id: '/deferred-hydration'
+      path: '/deferred-hydration'
+      fullPath: '/deferred-hydration'
+      preLoaderRoute: typeof DeferredHydrationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/entry-points': {
@@ -980,6 +1000,7 @@ const rootRouteChildren: RootRouteChildren = {
   SelectiveSsrRouteRoute: SelectiveSsrRouteRouteWithChildren,
   CssStylingRoute: CssStylingRoute,
   DeferredDataRoute: DeferredDataRoute,
+  DeferredHydrationRoute: DeferredHydrationRoute,
   EntryPointsRoute: EntryPointsRoute,
   EnvironmentVariablesRoute: EnvironmentVariablesRoute,
   ErrorHandlingRoute: ErrorHandlingRoute,

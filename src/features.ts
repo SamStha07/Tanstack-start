@@ -60,6 +60,7 @@ export const featureSections = [
     title: '6. Rendering modes',
     items: [
       { to: '/selective-ssr', title: 'Selective SSR', file: 'src/routes/selective-ssr/', description: "Per-route ssr: true | false | 'data-only'." },
+      { to: '/deferred-hydration', title: 'Deferred hydration', file: 'src/routes/deferred-hydration.tsx', description: 'Keep SSR HTML but hydrate later with <Hydrate when={visible()}>.' },
       { to: '/static-prerendering', title: 'Static prerendering', file: 'src/routes/static-prerendering.tsx', description: 'Pages rendered to HTML at build time.' },
     ],
   },
