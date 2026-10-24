@@ -49,6 +49,12 @@ export const featureSections = [
     ],
   },
   {
+    title: '5. Execution model',
+    items: [
+      { to: '/execution-model', title: 'Where does code run?', file: 'src/routes/execution-model.tsx', description: 'createIsomorphicFn, createServerOnlyFn, createClientOnlyFn and import protection.' },
+    ],
+  },
+  {
     title: '6. Rendering modes',
     items: [
       { to: '/static-prerendering', title: 'Static prerendering', file: 'src/routes/static-prerendering.tsx', description: 'Pages rendered to HTML at build time.' },

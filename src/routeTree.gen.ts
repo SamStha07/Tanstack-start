@@ -14,6 +14,7 @@ import { Route as CssStylingRouteImport } from './routes/css-styling'
 import { Route as DeferredDataRouteImport } from './routes/deferred-data'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
 import { Route as ErrorHandlingRouteImport } from './routes/error-handling'
+import { Route as ExecutionModelRouteImport } from './routes/execution-model'
 import { Route as FormsRouteImport } from './routes/forms'
 import { Route as HeadSeoRouteImport } from './routes/head-seo'
 import { Route as LoadersRouteImport } from './routes/loaders'
@@ -69,6 +70,11 @@ const EntryPointsRoute = EntryPointsRouteImport.update({
 const ErrorHandlingRoute = ErrorHandlingRouteImport.update({
   id: '/error-handling',
   path: '/error-handling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExecutionModelRoute = ExecutionModelRouteImport.update({
+  id: '/execution-model',
+  path: '/execution-model',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FormsRoute = FormsRouteImport.update({
@@ -235,6 +241,7 @@ export interface FileRoutesByFullPath {
   '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
   '/error-handling': typeof ErrorHandlingRoute
+  '/execution-model': typeof ExecutionModelRoute
   '/forms': typeof FormsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
@@ -272,6 +279,7 @@ export interface FileRoutesByTo {
   '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
   '/error-handling': typeof ErrorHandlingRoute
+  '/execution-model': typeof ExecutionModelRoute
   '/forms': typeof FormsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
@@ -308,6 +316,7 @@ export interface FileRoutesById {
   '/deferred-data': typeof DeferredDataRoute
   '/entry-points': typeof EntryPointsRoute
   '/error-handling': typeof ErrorHandlingRoute
+  '/execution-model': typeof ExecutionModelRoute
   '/forms': typeof FormsRoute
   '/head-seo': typeof HeadSeoRoute
   '/loaders': typeof LoadersRoute
@@ -348,6 +357,7 @@ export interface FileRouteTypes {
     | '/deferred-data'
     | '/entry-points'
     | '/error-handling'
+    | '/execution-model'
     | '/forms'
     | '/head-seo'
     | '/loaders'
@@ -385,6 +395,7 @@ export interface FileRouteTypes {
     | '/deferred-data'
     | '/entry-points'
     | '/error-handling'
+    | '/execution-model'
     | '/forms'
     | '/head-seo'
     | '/loaders'
@@ -420,6 +431,7 @@ export interface FileRouteTypes {
     | '/deferred-data'
     | '/entry-points'
     | '/error-handling'
+    | '/execution-model'
     | '/forms'
     | '/head-seo'
     | '/loaders'
@@ -459,6 +471,7 @@ export interface RootRouteChildren {
   DeferredDataRoute: typeof DeferredDataRoute
   EntryPointsRoute: typeof EntryPointsRoute
   ErrorHandlingRoute: typeof ErrorHandlingRoute
+  ExecutionModelRoute: typeof ExecutionModelRoute
   FormsRoute: typeof FormsRoute
   HeadSeoRoute: typeof HeadSeoRoute
   LoadersRoute: typeof LoadersRoute
@@ -522,6 +535,13 @@ declare module '@tanstack/react-router' {
       path: '/error-handling'
       fullPath: '/error-handling'
       preLoaderRoute: typeof ErrorHandlingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/execution-model': {
+      id: '/execution-model'
+      path: '/execution-model'
+      fullPath: '/execution-model'
+      preLoaderRoute: typeof ExecutionModelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forms': {
@@ -789,6 +809,7 @@ const rootRouteChildren: RootRouteChildren = {
   DeferredDataRoute: DeferredDataRoute,
   EntryPointsRoute: EntryPointsRoute,
   ErrorHandlingRoute: ErrorHandlingRoute,
+  ExecutionModelRoute: ExecutionModelRoute,
   FormsRoute: FormsRoute,
   HeadSeoRoute: HeadSeoRoute,
   LoadersRoute: LoadersRoute,
