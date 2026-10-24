@@ -20,6 +20,7 @@ import { Route as ExecutionModelRouteImport } from './routes/execution-model'
 import { Route as FormsRouteImport } from './routes/forms'
 import { Route as HeadSeoRouteImport } from './routes/head-seo'
 import { Route as HydrationRouteImport } from './routes/hydration'
+import { Route as IsrRouteImport } from './routes/isr'
 import { Route as LoadersRouteImport } from './routes/loaders'
 import { Route as MiddlewareRouteImport } from './routes/middleware'
 import { Route as NavigationRouteImport } from './routes/navigation'
@@ -109,6 +110,11 @@ const HeadSeoRoute = HeadSeoRouteImport.update({
 const HydrationRoute = HydrationRouteImport.update({
   id: '/hydration',
   path: '/hydration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IsrRoute = IsrRouteImport.update({
+  id: '/isr',
+  path: '/isr',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoadersRoute = LoadersRouteImport.update({
@@ -302,6 +308,7 @@ export interface FileRoutesByFullPath {
   '/forms': typeof FormsRoute
   '/head-seo': typeof HeadSeoRoute
   '/hydration': typeof HydrationRoute
+  '/isr': typeof IsrRoute
   '/loaders': typeof LoadersRoute
   '/middleware': typeof MiddlewareRoute
   '/navigation': typeof NavigationRoute
@@ -348,6 +355,7 @@ export interface FileRoutesByTo {
   '/forms': typeof FormsRoute
   '/head-seo': typeof HeadSeoRoute
   '/hydration': typeof HydrationRoute
+  '/isr': typeof IsrRoute
   '/loaders': typeof LoadersRoute
   '/middleware': typeof MiddlewareRoute
   '/navigation': typeof NavigationRoute
@@ -394,6 +402,7 @@ export interface FileRoutesById {
   '/forms': typeof FormsRoute
   '/head-seo': typeof HeadSeoRoute
   '/hydration': typeof HydrationRoute
+  '/isr': typeof IsrRoute
   '/loaders': typeof LoadersRoute
   '/middleware': typeof MiddlewareRoute
   '/navigation': typeof NavigationRoute
@@ -444,6 +453,7 @@ export interface FileRouteTypes {
     | '/forms'
     | '/head-seo'
     | '/hydration'
+    | '/isr'
     | '/loaders'
     | '/middleware'
     | '/navigation'
@@ -490,6 +500,7 @@ export interface FileRouteTypes {
     | '/forms'
     | '/head-seo'
     | '/hydration'
+    | '/isr'
     | '/loaders'
     | '/middleware'
     | '/navigation'
@@ -535,6 +546,7 @@ export interface FileRouteTypes {
     | '/forms'
     | '/head-seo'
     | '/hydration'
+    | '/isr'
     | '/loaders'
     | '/middleware'
     | '/navigation'
@@ -584,6 +596,7 @@ export interface RootRouteChildren {
   FormsRoute: typeof FormsRoute
   HeadSeoRoute: typeof HeadSeoRoute
   HydrationRoute: typeof HydrationRoute
+  IsrRoute: typeof IsrRoute
   LoadersRoute: typeof LoadersRoute
   MiddlewareRoute: typeof MiddlewareRoute
   NavigationRoute: typeof NavigationRoute
@@ -687,6 +700,13 @@ declare module '@tanstack/react-router' {
       path: '/hydration'
       fullPath: '/hydration'
       preLoaderRoute: typeof HydrationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/isr': {
+      id: '/isr'
+      path: '/isr'
+      fullPath: '/isr'
+      preLoaderRoute: typeof IsrRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/loaders': {
@@ -1008,6 +1028,7 @@ const rootRouteChildren: RootRouteChildren = {
   FormsRoute: FormsRoute,
   HeadSeoRoute: HeadSeoRoute,
   HydrationRoute: HydrationRoute,
+  IsrRoute: IsrRoute,
   LoadersRoute: LoadersRoute,
   MiddlewareRoute: MiddlewareRoute,
   NavigationRoute: NavigationRoute,
