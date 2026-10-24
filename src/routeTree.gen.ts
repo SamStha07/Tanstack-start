@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EntryPointsRouteImport } from './routes/entry-points'
 import { Route as RoutingRouteImport } from './routes/routing'
+import { Route as SearchParamsRouteImport } from './routes/search-params'
 import { Route as PathParamsIndexRouteImport } from './routes/path-params/index'
 import { Route as PathParamsPostIdRouteImport } from './routes/path-params/$postId'
 import { Route as RoutingIndexRouteImport } from './routes/routing.index'
@@ -34,6 +35,11 @@ const EntryPointsRoute = EntryPointsRouteImport.update({
 const RoutingRoute = RoutingRouteImport.update({
   id: '/routing',
   path: '/routing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchParamsRoute = SearchParamsRouteImport.update({
+  id: '/search-params',
+  path: '/search-params',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PathParamsIndexRoute = PathParamsIndexRouteImport.update({
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
   '/routing': typeof RoutingRouteWithChildren
+  '/search-params': typeof SearchParamsRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/nested': typeof RoutingNestedRoute
   '/path-params/': typeof PathParamsIndexRoute
@@ -92,6 +99,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
+  '/search-params': typeof SearchParamsRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing': typeof RoutingIndexRoute
   '/routing/nested': typeof RoutingNestedRoute
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/entry-points': typeof EntryPointsRoute
   '/routing': typeof RoutingRouteWithChildren
+  '/search-params': typeof SearchParamsRoute
   '/path-params/$postId': typeof PathParamsPostIdRoute
   '/routing/_pathless': typeof RoutingPathlessRouteWithChildren
   '/routing/nested': typeof RoutingNestedRoute
@@ -120,6 +129,7 @@ export interface FileRouteTypes {
     | '/'
     | '/entry-points'
     | '/routing'
+    | '/search-params'
     | '/path-params/$postId'
     | '/routing/nested'
     | '/path-params/'
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/entry-points'
+    | '/search-params'
     | '/path-params/$postId'
     | '/routing'
     | '/routing/nested'
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/'
     | '/entry-points'
     | '/routing'
+    | '/search-params'
     | '/path-params/$postId'
     | '/routing/_pathless'
     | '/routing/nested'
@@ -157,6 +169,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EntryPointsRoute: typeof EntryPointsRoute
   RoutingRoute: typeof RoutingRouteWithChildren
+  SearchParamsRoute: typeof SearchParamsRoute
   PathParamsPostIdRoute: typeof PathParamsPostIdRoute
   PathParamsIndexRoute: typeof PathParamsIndexRoute
   PathParamsFilesSplatRoute: typeof PathParamsFilesSplatRoute
@@ -184,6 +197,13 @@ declare module '@tanstack/react-router' {
       path: '/routing'
       fullPath: '/routing'
       preLoaderRoute: typeof RoutingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search-params': {
+      id: '/search-params'
+      path: '/search-params'
+      fullPath: '/search-params'
+      preLoaderRoute: typeof SearchParamsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/path-params/': {
@@ -276,6 +296,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EntryPointsRoute: EntryPointsRoute,
   RoutingRoute: RoutingRouteWithChildren,
+  SearchParamsRoute: SearchParamsRoute,
   PathParamsPostIdRoute: PathParamsPostIdRoute,
   PathParamsIndexRoute: PathParamsIndexRoute,
   PathParamsFilesSplatRoute: PathParamsFilesSplatRoute,
